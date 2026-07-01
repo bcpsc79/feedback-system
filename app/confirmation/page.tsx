@@ -62,13 +62,13 @@ function ConfirmationContent() {
       <main className="flex-1 flex items-start justify-center px-4 py-12">
         <div className="w-full max-w-xl space-y-5">
           {/* Success banner */}
-          <div className="flex items-start gap-3 bg-green-50 border border-green-200 rounded-lg p-4">
-            <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
+          <div className="flex items-start gap-3 bg-primary/10 border border-primary/25 rounded-2xl p-4">
+            <CheckCircle className="h-5 w-5 text-primary mt-0.5 shrink-0" />
             <div>
-              <p className="font-medium text-green-900 text-sm">
+              <p className="font-medium text-foreground text-sm">
                 Your report has been submitted
               </p>
-              <p className="text-green-800 text-sm mt-0.5">
+              <p className="text-muted-foreground text-sm mt-0.5">
                 A staff member will review it and may reply. Use the
                 credentials below to check back.
               </p>
@@ -77,29 +77,29 @@ function ConfirmationContent() {
 
           {/* Urgency notice */}
           {isUrgent && (
-            <div className="flex items-start gap-3 bg-amber-50 border border-amber-200 rounded-lg p-4">
-              <AlertTriangle className="h-5 w-5 text-amber-600 mt-0.5 shrink-0" />
+            <div className="flex items-start gap-3 bg-accent/15 border border-accent/35 rounded-2xl p-4">
+              <AlertTriangle className="h-5 w-5 text-[#bc6c25] mt-0.5 shrink-0" />
               <div className="text-sm">
-                <p className="font-medium text-amber-900">
+                <p className="font-medium text-foreground">
                   This may need urgent attention
                 </p>
-                <p className="text-amber-800 mt-1">
+                <p className="text-muted-foreground mt-1">
                   If you or someone else is in immediate danger, please call{" "}
-                  <strong>999</strong> (emergency) or reach out now:
+                  <strong className="text-foreground">999</strong> (emergency) or reach out now:
                 </p>
-                <ul className="mt-2 space-y-1 text-amber-800">
+                <ul className="mt-2 space-y-1 text-muted-foreground">
                   <li>
                     Crisis line:{" "}
-                    <strong>{URGENCY_RESOURCES.phone}</strong> (call or text)
+                    <strong className="text-foreground">{URGENCY_RESOURCES.phone}</strong> (call or text)
                   </li>
                   {URGENCY_RESOURCES.counselorContact && (
                     <li>
                       School counselor:{" "}
-                      <strong>{URGENCY_RESOURCES.counselorContact}</strong>
+                      <strong className="text-foreground">{URGENCY_RESOURCES.counselorContact}</strong>
                     </li>
                   )}
                   <li>
-                    Childline: <strong>0800 1111</strong> (free, 24/7)
+                    Childline: <strong className="text-foreground">0800 1111</strong> (free, 24/7)
                   </li>
                 </ul>
               </div>

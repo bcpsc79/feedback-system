@@ -104,7 +104,7 @@ export default function CheckInPage() {
                   <Label htmlFor="passphrase">Passphrase</Label>
                   <Input
                     id="passphrase"
-                    placeholder="e.g. tiger-maple-frost-noble"
+                    placeholder="e.g. tiger maple frost noble"
                     value={passphrase}
                     onChange={(e) => setPassphrase(e.target.value.toLowerCase())}
                     autoComplete="off"

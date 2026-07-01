@@ -45,7 +45,7 @@ const WORDS = [
 ];
 
 export function generatePassphrase(): string {
-  return Array.from({ length: 4 }, () => WORDS[randomInt(WORDS.length)]).join("-");
+  return Array.from({ length: 4 }, () => WORDS[randomInt(WORDS.length)]).join(" ");
 }
 
 // Case IDs: 10 chars from a URL-safe alphabet. Shown to the reporter.

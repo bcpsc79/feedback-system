@@ -155,9 +155,9 @@ export default async function ReporterThreadPage({ params }: Props) {
 
 function StatusBadge({ status, label }: { status: string; label: string }) {
   const colors: Record<string, string> = {
-    new: "bg-blue-50 text-blue-700 border-blue-200",
-    in_review: "bg-amber-50 text-amber-700 border-amber-200",
-    resolved: "bg-green-50 text-green-700 border-green-200",
+    new: "bg-[#e8f0d8] text-[#283618] border-[#606c38]/30",
+    in_review: "bg-[#fef3e2] text-[#bc6c25] border-[#dda15e]/40",
+    resolved: "bg-[#d4e0b8] text-[#283618] border-[#606c38]/50",
   };
   return (
     <span

@@ -24,23 +24,23 @@ export function StaffSidebar({ userName, userEmail }: Props) {
   }
 
   return (
-    <div className="hidden min-[1024px]:flex w-64 border-r h-full flex-col bg-background">
-      <div className="flex h-14 items-center border-b px-4 gap-2">
-        <ShieldCheck className="h-4 w-4 text-primary" />
-        <span className="font-semibold text-sm">SafeReport Staff</span>
+    <div className="hidden min-[1024px]:flex w-64 h-full flex-col bg-sidebar rounded-r-2xl overflow-hidden">
+      <div className="flex h-14 items-center px-5 gap-2.5 border-b border-sidebar-border">
+        <ShieldCheck className="h-4 w-4 text-sidebar-primary" />
+        <span className="font-semibold text-sm text-sidebar-foreground">SafeReport Staff</span>
       </div>
 
       <nav className="flex flex-col h-full justify-between">
-        <div className="p-4 space-y-1">
+        <div className="p-3 space-y-0.5">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               className={cn(
-                "flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                "flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors",
                 pathname === item.href || (item.href !== "/staff/dashboard" && pathname.startsWith(item.href))
-                  ? "bg-primary/10 text-primary"
-                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                  ? "bg-sidebar-primary text-sidebar-primary-foreground"
+                  : "text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-foreground"
               )}
             >
               <item.icon className="h-4 w-4" />
@@ -49,14 +49,14 @@ export function StaffSidebar({ userName, userEmail }: Props) {
           ))}
         </div>
 
-        <div className="p-4 border-t space-y-3">
-          <div className="px-3">
-            <p className="text-sm font-medium text-foreground truncate">{userName}</p>
-            <p className="text-xs text-muted-foreground truncate">{userEmail}</p>
+        <div className="p-3 border-t border-sidebar-border space-y-1">
+          <div className="px-3 py-2">
+            <p className="text-sm font-medium text-sidebar-foreground truncate">{userName}</p>
+            <p className="text-xs text-sidebar-foreground/50 truncate">{userEmail}</p>
           </div>
           <button
             onClick={handleSignOut}
-            className="flex items-center gap-2 w-full rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+            className="flex items-center gap-2.5 w-full rounded-xl px-3 py-2.5 text-sm font-medium text-sidebar-foreground/60 hover:bg-sidebar-accent hover:text-sidebar-foreground transition-colors"
           >
             <LogOut className="h-4 w-4" />
             Sign out

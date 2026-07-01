@@ -6,8 +6,8 @@
 @theme inline {
     --color-background: var(--background);
     --color-foreground: var(--foreground);
-    --font-sans: var(--font-apple-system);
-    --font-mono: var(--font-sf-mono);
+    --font-sans: var(--font-sans-stack);
+    --font-mono: var(--font-mono-stack);
     --color-sidebar-ring: var(--sidebar-ring);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -37,65 +37,63 @@
     --color-popover: var(--popover);
     --color-card-foreground: var(--card-foreground);
     --color-card: var(--card);
-    --radius-sm: 8px;
-    --radius-md: 10px;
-    --radius-lg: 12px;
-    --radius-xl: 20px;
+    --radius-sm: 10px;
+    --radius-md: 14px;
+    --radius-lg: 18px;
+    --radius-xl: 24px;
 }
 
 :root {
-    /* Apple Light Theme Colors */
-    --background: #ffffff;
-    --foreground: #000000;
-    --card: #ffffff;
-    --card-foreground: #000000;
-    --popover: #ffffff;
-    --popover-foreground: #000000;
-    --primary: #0071e3; /* Apple Blue */
-    --primary-foreground: #ffffff;
-    --secondary: #f5f5f7; /* Apple Light Gray */
-    --secondary-foreground: #1d1d1f;
-    --muted: #f5f5f7;
-    --muted-foreground: #86868b;
-    --accent: #0071e3; /* Apple Blue */
-    --accent-foreground: #ffffff;
-    --destructive: #ff3b30; /* Apple Red */
-    --destructive-foreground: #ffffff;
-    --border: #e2e2e7; /* Lighter, more subtle border */
-    --input: #f5f5f7;
-    --ring: #0071e3;
-    --chart-1: #0071e3; /* Apple Blue */
-    --chart-2: #34c759; /* Apple Green */
-    --chart-3: #ff9500; /* Apple Orange */
-    --chart-4: #ffcc00; /* Apple Yellow */
-    --chart-5: #af52de; /* Apple Purple */
-    --sidebar: #f5f5f7;
-    --sidebar-foreground: #1d1d1f;
-    --sidebar-primary: #0071e3;
-    --sidebar-primary-foreground: #ffffff;
-    --sidebar-accent: #e8e8ed;
-    --sidebar-accent-foreground: #1d1d1f;
-    --sidebar-border: #e2e2e7; /* Lighter border */
-    --sidebar-ring: #0071e3;
-    /* Apple Fonts */
-    --font-apple-system:
-        -apple-system, BlinkMacSystemFont, "San Francisco", "Helvetica Neue",
-        Helvetica, sans-serif;
-    --font-sf-mono: "SF Mono", Menlo, monospace;
-    --font-sans: var(--font-apple-system);
-    --font-serif: "New York", Georgia, serif;
-    --font-mono: var(--font-sf-mono);
-    /* Apple uses more rounded corners */
-    --radius: 10px;
-    /* Apple-style shadows */
-    --shadow-2xs: 0px 1px 2px rgba(0, 0, 0, 0.05);
-    --shadow-xs: 0px 1px 3px rgba(0, 0, 0, 0.1);
-    --shadow-sm: 0px 2px 4px rgba(0, 0, 0, 0.1);
-    --shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
-    --shadow-md: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0px 8px 16px rgba(0, 0, 0, 0.1);
-    --shadow-xl: 0px 12px 24px rgba(0, 0, 0, 0.1);
-    --shadow-2xl: 0px 16px 32px rgba(0, 0, 0, 0.1);
+    /* Earthy green/cream palette */
+    --background: #fefae0;          /* cream */
+    --foreground: #283618;          /* dark forest */
+    --card: #fffef5;                /* near-white warm card */
+    --card-foreground: #283618;
+    --popover: #fffef5;
+    --popover-foreground: #283618;
+    --primary: #606c38;             /* olive green */
+    --primary-foreground: #fefae0;  /* cream on olive */
+    --secondary: #eae5c8;           /* warm parchment */
+    --secondary-foreground: #283618;
+    --muted: #f0ece0;               /* soft cream for muted surfaces */
+    --muted-foreground: #6b7040;    /* olive-gray for secondary text */
+    --accent: #dda15e;              /* warm amber */
+    --accent-foreground: #283618;
+    --destructive: #c0392b;
+    --destructive-foreground: #fefae0;
+    --border: #d4cdb0;              /* warm tan border */
+    --input: #f5f0dc;               /* slightly darker cream for inputs */
+    --ring: #606c38;
+    --chart-1: #606c38;
+    --chart-2: #dda15e;
+    --chart-3: #bc6c25;
+    --chart-4: #283618;
+    --chart-5: #8a9e52;
+    /* Sidebar — dark forest */
+    --sidebar: #283618;
+    --sidebar-foreground: #fefae0;
+    --sidebar-primary: #dda15e;
+    --sidebar-primary-foreground: #283618;
+    --sidebar-accent: #3a4d1e;
+    --sidebar-accent-foreground: #fefae0;
+    --sidebar-border: #1e2a10;
+    --sidebar-ring: #606c38;
+    /* System font stack (Apple-like) */
+    --font-sans-stack:
+        -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue",
+        Arial, sans-serif;
+    --font-mono-stack: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --font-sans: var(--font-sans-stack);
+    --font-mono: var(--font-mono-stack);
+    --radius: 14px;
+    --shadow-2xs: 0px 1px 2px rgba(40, 54, 24, 0.04);
+    --shadow-xs: 0px 1px 3px rgba(40, 54, 24, 0.07);
+    --shadow-sm: 0px 2px 6px rgba(40, 54, 24, 0.08);
+    --shadow: 0px 4px 12px rgba(40, 54, 24, 0.08);
+    --shadow-md: 0px 6px 16px rgba(40, 54, 24, 0.10);
+    --shadow-lg: 0px 12px 28px rgba(40, 54, 24, 0.12);
+    --shadow-xl: 0px 20px 40px rgba(40, 54, 24, 0.14);
+    --shadow-2xl: 0px 28px 56px rgba(40, 54, 24, 0.16);
 }
 
 @layer base {
@@ -111,7 +109,7 @@
     input,
     select,
     textarea {
-        @apply focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all duration-200;
+        @apply focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all duration-200;
     }
     button {
         @apply hover:cursor-pointer;
