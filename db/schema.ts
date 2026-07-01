@@ -24,7 +24,9 @@ export const session = pgTable("session", {
   token: text("token").notNull().unique(),
   createdAt: timestamp("createdAt").notNull().defaultNow(),
   updatedAt: timestamp("updatedAt").notNull().defaultNow(),
-  // ipAddress and userAgent intentionally omitted — we do not log staff device metadata
+  // Staff sessions only — not stored for anonymous reporters
+  ipAddress: text("ipAddress"),
+  userAgent: text("userAgent"),
   userId: text("userId")
     .notNull()
     .references(() => user.id, { onDelete: "cascade" }),

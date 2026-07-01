@@ -25,7 +25,8 @@ CREATE TABLE "session" (
   "token" text NOT NULL,
   "createdAt" timestamp DEFAULT now() NOT NULL,
   "updatedAt" timestamp DEFAULT now() NOT NULL,
-  -- ipAddress and userAgent intentionally omitted
+  "ipAddress" text,
+  "userAgent" text,
   "userId" text NOT NULL,
   CONSTRAINT "session_token_unique" UNIQUE("token")
 );
