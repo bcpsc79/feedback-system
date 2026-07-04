@@ -57,8 +57,8 @@ export default function StaffSignInPage() {
             <CardHeader>
               <CardTitle className="text-lg">Staff sign in</CardTitle>
               <CardDescription>
-                This portal is for authorised staff only. Reports are anonymous
-                — no reporter identity is ever stored.
+                This portal is for authorised staff only. Reports are anonymous.
+                No reporter identity is ever stored.
               </CardDescription>
             </CardHeader>
             <CardContent>

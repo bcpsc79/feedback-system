@@ -82,7 +82,7 @@ export default async function StaffDashboardPage() {
                     {format(new Date(report.createdAt), "dd MMM yyyy")}
                   </td>
                   <td className="px-4 py-3 text-muted-foreground text-xs">
-                    {report.assignedStaffName ?? "—"}
+                    {report.assignedStaffName ?? "None"}
                   </td>
                   <td className="px-4 py-3 text-right">
                     <Link

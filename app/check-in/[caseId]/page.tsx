@@ -60,7 +60,7 @@ export default async function ReporterThreadPage({ params }: Props) {
     CATEGORY_LABELS[report.category as Category] ?? report.category;
 
   const statusLabel: Record<string, string> = {
-    new: "New — awaiting review",
+    new: "New, awaiting review",
     in_review: "Under review",
     resolved: "Resolved",
   };

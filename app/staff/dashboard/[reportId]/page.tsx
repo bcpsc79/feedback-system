@@ -89,7 +89,7 @@ export default async function StaffReportPage({ params }: Props) {
       {/* Anonymity reminder */}
       <p className="text-xs text-muted-foreground bg-muted/30 border rounded-lg px-4 py-3">
         <strong>Anonymity reminder:</strong> No reporter name, email, or device information
-        is stored. Reply thoughtfully — the reporter will see your response when they check in.
+        is stored. Reply thoughtfully. The reporter will see your response when they check in.
       </p>
 
       {/* Thread */}

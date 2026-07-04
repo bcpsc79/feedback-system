@@ -128,7 +128,7 @@ export default function ReportPage() {
                   <Label htmlFor="content">Description</Label>
                   <Textarea
                     id="content"
-                    placeholder="Describe what happened, when, and where. Do not include your own name or contact details — your report is anonymous."
+                    placeholder="Describe what happened, when, and where. Do not include your own name or contact details. Your report is anonymous."
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
                     rows={6}

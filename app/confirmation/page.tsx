@@ -40,7 +40,7 @@ function ConfirmationContent() {
       toast.success("Copied to clipboard");
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      toast.error("Could not copy — please select and copy manually.");
+      toast.error("Could not copy. Please select and copy manually.");
     }
   }
 

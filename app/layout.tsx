@@ -2,9 +2,9 @@ import { Toaster } from "@/components/ui/sonner";
 import type { Metadata } from "next";
 import { ThemeProvider } from "../components/provider";
 import "./globals.css";
-
+ 
 export const metadata: Metadata = {
-  title: "SafeReport — Anonymous School Safety Reporting",
+  title: "SafeReport | Anonymous School Safety Reporting",
   description:
     "Submit anonymous safety, wellbeing, and conduct concerns. No account, name, or contact information required.",
 };
