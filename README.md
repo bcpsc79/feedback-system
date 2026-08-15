@@ -3,7 +3,7 @@
 Anonymous student safety reporting app. Students submit reports (bullying, safety hazards, mental health concerns, abuse, academic dishonesty, policy complaints, or other) without an account; staff sign in to review, track, and resolve them.
 
 ## Tech Stack
-
+ 
 - **Framework**: Next.js 15 (App Router)
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS + shadcn/ui + Radix UI
