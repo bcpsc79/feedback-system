@@ -1,7 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
+import { Button, TextField } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -43,16 +42,19 @@ export function ReporterReplyForm({ caseId }: { caseId: string }) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-3">
-      <Textarea
+      <TextField
         placeholder="আরও তথ্য লিখো বা প্রশ্ন করো। নিজের নাম বা যোগাযোগের তথ্য দিও না।"
         value={content}
         onChange={(e) => setContent(e.target.value)}
+        multiline
         rows={4}
-        maxLength={3000}
+        inputProps={{ maxLength: 3000 }}
         className="resize-none"
+        fullWidth
+        variant="outlined"
       />
       <p className="text-xs text-muted-foreground text-right">{content.length}/3000</p>
-      <Button type="submit" disabled={submitting || !content.trim()}>
+      <Button type="submit" variant="contained" disabled={submitting || !content.trim()}>
         {submitting ? "পাঠানো হচ্ছে..." : "বার্তা পাঠাও"}
       </Button>
     </form>

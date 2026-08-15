@@ -1,11 +1,4 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
+import { Card, CardContent, Typography, Divider } from "@mui/material";
 import { db } from "@/db/drizzle";
 import { CATEGORY_LABELS, replies, reports, type Category } from "@/db/schema";
 import { verifyReporterToken } from "@/lib/reporter-token";
