@@ -16,12 +16,12 @@ export async function POST(req: NextRequest) {
   try {
     body = await req.json();
   } catch {
-    return NextResponse.json({ error: "Invalid request" }, { status: 400 });
+    return NextResponse.json({ error: "অনুরোধটি ঠিকভাবে পড়া যায়নি।" }, { status: 400 });
   }
 
   const parsed = schema.safeParse(body);
   if (!parsed.success) {
-    return NextResponse.json({ error: "Missing case ID or passphrase" }, { status: 422 });
+    return NextResponse.json({ error: "কেস আইডি বা পাসফ্রেজ দেওয়া হয়নি।" }, { status: 422 });
   }
 
   const { caseId, passphrase } = parsed.data;
@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
   const valid = report.length > 0 && (await verifyPassphrase(passphrase, report[0].passphraseHash));
 
   if (!valid) {
-    return NextResponse.json({ error: "Incorrect case ID or passphrase." }, { status: 401 });
+    return NextResponse.json({ error: "কেস আইডি বা পাসফ্রেজ ঠিক নয়।" }, { status: 401 });
   }
 
   const token = signReporterToken(caseId);

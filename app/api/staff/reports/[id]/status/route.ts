@@ -16,7 +16,7 @@ export async function PATCH(
 ) {
   const session = await auth.api.getSession({ headers: await headers() });
   if (!session?.user) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    return NextResponse.json({ error: "অনুমতি নেই।" }, { status: 401 });
   }
 
   const { id } = await params;
@@ -25,12 +25,12 @@ export async function PATCH(
   try {
     body = await req.json();
   } catch {
-    return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
+    return NextResponse.json({ error: "অনুরোধটি ঠিকভাবে পড়া যায়নি।" }, { status: 400 });
   }
 
   const parsed = schema.safeParse(body);
   if (!parsed.success) {
-    return NextResponse.json({ error: "Invalid status value" }, { status: 422 });
+    return NextResponse.json({ error: "স্ট্যাটাসের মান ঠিক নয়।" }, { status: 422 });
   }
 
   const result = await db
@@ -40,7 +40,7 @@ export async function PATCH(
     .returning({ id: reports.id });
 
   if (!result.length) {
-    return NextResponse.json({ error: "Not found" }, { status: 404 });
+    return NextResponse.json({ error: "রিপোর্ট পাওয়া যায়নি।" }, { status: 404 });
   }
 
   return NextResponse.json({ ok: true });

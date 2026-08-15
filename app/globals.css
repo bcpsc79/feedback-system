@@ -25,6 +25,8 @@
     --color-input: var(--input);
     --color-border: var(--border);
     --color-destructive: var(--destructive);
+    --color-success: var(--success);
+    --color-warning: var(--warning);
     --color-accent-foreground: var(--accent-foreground);
     --color-accent: var(--accent);
     --color-muted-foreground: var(--muted-foreground);
@@ -44,40 +46,41 @@
 }
 
 :root {
-    /* Earthy green/cream palette */
-    --background: #fefae0;          /* cream */
-    --foreground: #283618;          /* dark forest */
-    --card: #fffef5;                /* near-white warm card */
-    --card-foreground: #283618;
-    --popover: #fffef5;
-    --popover-foreground: #283618;
-    --primary: #606c38;             /* olive green */
-    --primary-foreground: #fefae0;  /* cream on olive */
-    --secondary: #eae5c8;           /* warm parchment */
-    --secondary-foreground: #283618;
-    --muted: #f0ece0;               /* soft cream for muted surfaces */
-    --muted-foreground: #6b7040;    /* olive-gray for secondary text */
-    --accent: #dda15e;              /* warm amber */
-    --accent-foreground: #283618;
-    --destructive: #c0392b;
-    --destructive-foreground: #fefae0;
-    --border: #d4cdb0;              /* warm tan border */
-    --input: #f5f0dc;               /* slightly darker cream for inputs */
-    --ring: #606c38;
-    --chart-1: #606c38;
-    --chart-2: #dda15e;
-    --chart-3: #bc6c25;
-    --chart-4: #283618;
-    --chart-5: #8a9e52;
-    /* Sidebar — dark forest */
-    --sidebar: #283618;
-    --sidebar-foreground: #fefae0;
-    --sidebar-primary: #dda15e;
-    --sidebar-primary-foreground: #283618;
-    --sidebar-accent: #3a4d1e;
-    --sidebar-accent-foreground: #fefae0;
-    --sidebar-border: #1e2a10;
-    --sidebar-ring: #606c38;
+    /* SafeReport blue palette */
+    --background: #f8fafc;
+    --foreground: #374151;
+    --card: #ffffff;
+    --card-foreground: #1f2937;
+    --popover: #ffffff;
+    --popover-foreground: #1f2937;
+    --primary: #261b74;
+    --primary-foreground: #ffffff;
+    --secondary: #fffbea;
+    --secondary-foreground: #1f2937;
+    --muted: #f8fafc;
+    --muted-foreground: #6b7280;
+    --accent: #2563a6;
+    --accent-foreground: #ffffff;
+    --destructive: #d43f3a;
+    --destructive-foreground: #ffffff;
+    --success: #19773b;
+    --warning: #f2b705;
+    --border: #e5e7eb;
+    --input: #d1d5db;
+    --ring: #337ab7;
+    --chart-1: #261b74;
+    --chart-2: #337ab7;
+    --chart-3: #2563a6;
+    --chart-4: #19773b;
+    --chart-5: #f2b705;
+    --sidebar: #261b74;
+    --sidebar-foreground: #ffffff;
+    --sidebar-primary: #337ab7;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #2563a6;
+    --sidebar-accent-foreground: #ffffff;
+    --sidebar-border: #337ab7;
+    --sidebar-ring: #337ab7;
     /* System font stack (Apple-like) */
     --font-sans-stack:
         -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue",
@@ -86,14 +89,14 @@
     --font-sans: var(--font-sans-stack);
     --font-mono: var(--font-mono-stack);
     --radius: 14px;
-    --shadow-2xs: 0px 1px 2px rgba(40, 54, 24, 0.04);
-    --shadow-xs: 0px 1px 3px rgba(40, 54, 24, 0.07);
-    --shadow-sm: 0px 2px 6px rgba(40, 54, 24, 0.08);
-    --shadow: 0px 4px 12px rgba(40, 54, 24, 0.08);
-    --shadow-md: 0px 6px 16px rgba(40, 54, 24, 0.10);
-    --shadow-lg: 0px 12px 28px rgba(40, 54, 24, 0.12);
-    --shadow-xl: 0px 20px 40px rgba(40, 54, 24, 0.14);
-    --shadow-2xl: 0px 28px 56px rgba(40, 54, 24, 0.16);
+    --shadow-2xs: 0px 1px 2px rgba(31, 41, 55, 0.04);
+    --shadow-xs: 0px 1px 3px rgba(31, 41, 55, 0.07);
+    --shadow-sm: 0px 2px 6px rgba(31, 41, 55, 0.08);
+    --shadow: 0px 4px 12px rgba(31, 41, 55, 0.08);
+    --shadow-md: 0px 6px 16px rgba(31, 41, 55, 0.10);
+    --shadow-lg: 0px 12px 28px rgba(31, 41, 55, 0.12);
+    --shadow-xl: 0px 20px 40px rgba(31, 41, 55, 0.14);
+    --shadow-2xl: 0px 28px 56px rgba(31, 41, 55, 0.16);
 }
 
 @layer base {

@@ -25,7 +25,7 @@ export default function CheckInPage() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!caseId.trim() || !passphrase.trim()) {
-      toast.error("Please enter both your Case ID and passphrase.");
+      toast.error("কেস আইডি ও পাসফ্রেজ দুটোই লিখো।");
       return;
     }
 
@@ -38,18 +38,18 @@ export default function CheckInPage() {
       });
 
       if (res.status === 401) {
-        toast.error("Incorrect Case ID or passphrase. Please try again.");
+        toast.error("কেস আইডি বা পাসফ্রেজ ঠিক নয়। আবার চেষ্টা করো।");
         return;
       }
       if (!res.ok) {
-        toast.error("Something went wrong. Please try again.");
+        toast.error("কিছু সমস্যা হয়েছে। আবার চেষ্টা করো।");
         return;
       }
 
       const { caseId: confirmedId } = await res.json();
       router.push(`/check-in/${confirmedId}`);
     } catch {
-      toast.error("Network error. Please try again.");
+      toast.error("নেটওয়ার্ক সমস্যা হয়েছে। আবার চেষ্টা করো।");
     } finally {
       setLoading(false);
     }
@@ -70,27 +70,28 @@ export default function CheckInPage() {
         <div className="w-full max-w-md">
           <div className="mb-8 text-center">
             <h1 className="text-2xl font-semibold text-foreground mb-2">
-              Check in on your report
+              তোমার রিপোর্টের খবর দেখো
             </h1>
             <p className="text-muted-foreground text-sm">
-              Enter the Case ID and passphrase you received when you submitted your report.
+              রিপোর্ট জমা দেওয়ার সময় পাওয়া কেস আইডি ও পাসফ্রেজ লিখো।
             </p>
           </div>
 
           <Card>
             <CardHeader>
-              <CardTitle className="text-base">Report access</CardTitle>
+              <CardTitle className="text-base">রিপোর্ট দেখার তথ্য</CardTitle>
               <CardDescription>
-                Your credentials were shown once after submission. No account is required.
+                এই তথ্যগুলো রিপোর্ট জমা দেওয়ার পর একবারই দেখানো হয়েছিল। কোনো
+                অ্যাকাউন্ট লাগবে না।
               </CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="caseId">Case ID</Label>
+                  <Label htmlFor="caseId">কেস আইডি</Label>
                   <Input
                     id="caseId"
-                    placeholder="e.g. A3K7M2PQ5N"
+                    placeholder="যেমন A3K7M2PQ5N"
                     value={caseId}
                     onChange={(e) => setCaseId(e.target.value.toUpperCase())}
                     autoComplete="off"
@@ -101,10 +102,10 @@ export default function CheckInPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="passphrase">Passphrase</Label>
+                  <Label htmlFor="passphrase">পাসফ্রেজ</Label>
                   <Input
                     id="passphrase"
-                    placeholder="e.g. tiger maple frost noble"
+                    placeholder="যেমন tiger maple frost noble"
                     value={passphrase}
                     onChange={(e) => setPassphrase(e.target.value.toLowerCase())}
                     autoComplete="off"
@@ -114,16 +115,16 @@ export default function CheckInPage() {
                 </div>
 
                 <Button type="submit" className="w-full" disabled={loading}>
-                  {loading ? "Verifying…" : "Access my report"}
+                  {loading ? "যাচাই হচ্ছে..." : "আমার রিপোর্ট দেখাও"}
                 </Button>
               </form>
             </CardContent>
           </Card>
 
           <p className="mt-6 text-xs text-muted-foreground text-center">
-            Haven&apos;t submitted a report yet?{" "}
+            এখনো রিপোর্ট জমা দাওনি?{" "}
             <Link href="/" className="underline hover:text-foreground">
-              Submit anonymously
+              নাম না জানিয়ে রিপোর্ট করো
             </Link>
           </p>
         </div>

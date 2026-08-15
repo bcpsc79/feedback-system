@@ -23,14 +23,14 @@ export function StaffReplyForm({ reportId }: { reportId: string }) {
         body: JSON.stringify({ content: content.trim() }),
       });
       if (!res.ok) {
-        toast.error("Failed to send reply. Please try again.");
+        toast.error("উত্তর পাঠানো যায়নি। আবার চেষ্টা করুন।");
         return;
       }
       setContent("");
-      toast.success("Reply sent.");
+      toast.success("উত্তর পাঠানো হয়েছে।");
       router.refresh();
     } catch {
-      toast.error("Network error.");
+      toast.error("নেটওয়ার্ক সমস্যা হয়েছে।");
     } finally {
       setSubmitting(false);
     }
@@ -39,7 +39,7 @@ export function StaffReplyForm({ reportId }: { reportId: string }) {
   return (
     <form onSubmit={handleSubmit} className="space-y-3">
       <Textarea
-        placeholder="Write a response to the reporter. This will be visible to them when they check in with their Case ID."
+        placeholder="রিপোর্টকারীকে উত্তর লিখুন। তারা কেস আইডি দিয়ে ঢুকলে এই উত্তর দেখতে পাবে।"
         value={content}
         onChange={(e) => setContent(e.target.value)}
         rows={5}
@@ -48,7 +48,7 @@ export function StaffReplyForm({ reportId }: { reportId: string }) {
       />
       <p className="text-xs text-muted-foreground text-right">{content.length}/3000</p>
       <Button type="submit" disabled={submitting || !content.trim()}>
-        {submitting ? "Sending…" : "Send reply"}
+        {submitting ? "পাঠানো হচ্ছে..." : "উত্তর পাঠান"}
       </Button>
     </form>
   );

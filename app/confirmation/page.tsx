@@ -34,20 +34,20 @@ function ConfirmationContent() {
   async function copyCredentials() {
     try {
       await navigator.clipboard.writeText(
-        `Case ID: ${caseId}\nPassphrase: ${passphrase}`
+        `কেস আইডি: ${caseId}\nপাসফ্রেজ: ${passphrase}`
       );
       setCopied(true);
-      toast.success("Copied to clipboard");
+      toast.success("কপি করা হয়েছে");
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      toast.error("Could not copy. Please select and copy manually.");
+      toast.error("কপি করা যায়নি। দয়া করে নিজে সিলেক্ট করে কপি করো।");
     }
   }
 
   if (!caseId || !passphrase) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p className="text-muted-foreground">No report data found.</p>
+        <p className="text-muted-foreground">রিপোর্টের তথ্য পাওয়া যায়নি।</p>
       </div>
     );
   }
@@ -66,11 +66,11 @@ function ConfirmationContent() {
             <CheckCircle className="h-5 w-5 text-primary mt-0.5 shrink-0" />
             <div>
               <p className="font-medium text-foreground text-sm">
-                Your report has been submitted
+                তোমার রিপোর্ট জমা হয়েছে
               </p>
               <p className="text-muted-foreground text-sm mt-0.5">
-                A staff member will review it and may reply. Use the
-                credentials below to check back.
+                দায়িত্বপ্রাপ্ত স্টাফ এটি দেখবেন এবং উত্তর দিতে পারেন। পরে
+                খবর দেখতে নিচের তথ্যগুলো ব্যবহার করো।
               </p>
             </div>
           </div>
@@ -78,28 +78,28 @@ function ConfirmationContent() {
           {/* Urgency notice */}
           {isUrgent && (
             <div className="flex items-start gap-3 bg-accent/15 border border-accent/35 rounded-2xl p-4">
-              <AlertTriangle className="h-5 w-5 text-[#bc6c25] mt-0.5 shrink-0" />
+              <AlertTriangle className="h-5 w-5 text-warning mt-0.5 shrink-0" />
               <div className="text-sm">
                 <p className="font-medium text-foreground">
-                  This may need urgent attention
+                  এটি জরুরি হতে পারে
                 </p>
                 <p className="text-muted-foreground mt-1">
-                  If you or someone else is in immediate danger, please call{" "}
-                  <strong className="text-foreground">999</strong> (emergency) or reach out now:
+                  তুমি বা অন্য কেউ তাৎক্ষণিক বিপদে থাকলে এখনই{" "}
+                  <strong className="text-foreground">999</strong> (জরুরি সেবা) নম্বরে কল করো, অথবা যোগাযোগ করো:
                 </p>
                 <ul className="mt-2 space-y-1 text-muted-foreground">
                   <li>
-                    Crisis line:{" "}
-                    <strong className="text-foreground">{URGENCY_RESOURCES.phone}</strong> (call or text)
+                    জরুরি সহায়তা:{" "}
+                    <strong className="text-foreground">{URGENCY_RESOURCES.phone}</strong> (কল বা টেক্সট)
                   </li>
                   {URGENCY_RESOURCES.counselorContact && (
                     <li>
-                      School counselor:{" "}
+                      স্কুল কাউন্সেলর:{" "}
                       <strong className="text-foreground">{URGENCY_RESOURCES.counselorContact}</strong>
                     </li>
                   )}
                   <li>
-                    Childline: <strong className="text-foreground">0800 1111</strong> (free, 24/7)
+                    Childline: <strong className="text-foreground">0800 1111</strong> (ফ্রি, ২৪/৭)
                   </li>
                 </ul>
               </div>
@@ -110,18 +110,17 @@ function ConfirmationContent() {
           <Card>
             <CardHeader>
               <CardTitle className="text-base">
-                Save your access credentials
+                রিপোর্ট দেখার তথ্য সংরক্ষণ করো
               </CardTitle>
               <CardDescription>
-                These are shown <strong>only once</strong>. Write them down or
-                copy them somewhere safe. You will need both to check back on
-                your report.
+                এগুলো <strong>শুধু একবার</strong> দেখানো হয়। লিখে রাখো বা
+                নিরাপদ কোথাও কপি করে রাখো। পরে রিপোর্টের খবর দেখতে দুটোই লাগবে।
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-1">
                 <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
-                  Case ID
+                  কেস আইডি
                 </p>
                 <p className="font-mono text-xl font-semibold tracking-widest text-foreground">
                   {caseId}
@@ -130,7 +129,7 @@ function ConfirmationContent() {
               <Separator />
               <div className="space-y-1">
                 <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
-                  Passphrase
+                  পাসফ্রেজ
                 </p>
                 <p className="font-mono text-lg font-semibold text-foreground break-all">
                   {passphrase}
@@ -142,7 +141,7 @@ function ConfirmationContent() {
                 onClick={copyCredentials}
               >
                 <ClipboardCopy className="h-4 w-4 mr-2" />
-                {copied ? "Copied!" : "Copy Case ID + Passphrase"}
+                {copied ? "কপি হয়েছে!" : "কেস আইডি + পাসফ্রেজ কপি করো"}
               </Button>
             </CardContent>
           </Card>
@@ -150,29 +149,29 @@ function ConfirmationContent() {
           <Card className="bg-muted/30">
             <CardContent className="pt-4 text-sm text-muted-foreground space-y-2">
               <p>
-                <strong className="text-foreground">Your privacy:</strong> No
-                names, email addresses, IP addresses, or device information were
-                stored with this report.
+                <strong className="text-foreground">তোমার গোপনীয়তা:</strong>{" "}
+                এই রিপোর্টের সঙ্গে কোনো নাম, ইমেইল, IP address বা ডিভাইসের
+                তথ্য রাখা হয়নি।
               </p>
               <p>
-                To see staff replies, visit{" "}
+                স্টাফের উত্তর দেখতে{" "}
                 <Link
                   href="/check-in"
                   className="underline text-foreground hover:text-primary"
                 >
                   safereport/check-in
                 </Link>{" "}
-                and enter your Case ID and passphrase.
+                এ গিয়ে কেস আইডি ও পাসফ্রেজ লিখো।
               </p>
             </CardContent>
           </Card>
 
           <div className="flex gap-3">
             <Button asChild variant="outline" className="flex-1">
-              <Link href="/check-in">Go to check-in</Link>
+              <Link href="/check-in">খবর দেখতে যাও</Link>
             </Button>
             <Button asChild className="flex-1">
-              <Link href="/">Submit another report</Link>
+              <Link href="/">আরেকটি রিপোর্ট করো</Link>
             </Button>
           </div>
         </div>
@@ -186,7 +185,7 @@ export default function ConfirmationPage() {
     <Suspense
       fallback={
         <div className="min-h-screen flex items-center justify-center">
-          <p className="text-muted-foreground">Loading…</p>
+          <p className="text-muted-foreground">লোড হচ্ছে...</p>
         </div>
       }
     >

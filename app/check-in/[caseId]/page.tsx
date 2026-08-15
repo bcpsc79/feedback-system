@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -7,7 +6,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { Textarea } from "@/components/ui/textarea";
 import { db } from "@/db/drizzle";
 import { CATEGORY_LABELS, replies, reports, type Category } from "@/db/schema";
 import { verifyReporterToken } from "@/lib/reporter-token";
@@ -60,9 +58,9 @@ export default async function ReporterThreadPage({ params }: Props) {
     CATEGORY_LABELS[report.category as Category] ?? report.category;
 
   const statusLabel: Record<string, string> = {
-    new: "New, awaiting review",
-    in_review: "Under review",
-    resolved: "Resolved",
+    new: "নতুন, এখনো দেখা হয়নি",
+    in_review: "পর্যালোচনায় আছে",
+    resolved: "সমাধান হয়েছে",
   };
 
   return (
@@ -75,7 +73,7 @@ export default async function ReporterThreadPage({ params }: Props) {
           </Link>
         </div>
         <span className="text-xs text-muted-foreground font-mono">
-          Case {report.id}
+          কেস {report.id}
         </span>
       </header>
 
@@ -87,7 +85,7 @@ export default async function ReporterThreadPage({ params }: Props) {
               <div>
                 <CardTitle className="text-base">{categoryLabel}</CardTitle>
                 <CardDescription className="mt-1">
-                  Submitted {format(new Date(report.createdAt), "dd MMM yyyy")}
+                  জমা হয়েছে {format(new Date(report.createdAt), "dd/MM/yyyy")}
                 </CardDescription>
               </div>
               <StatusBadge status={report.status} label={statusLabel[report.status] ?? report.status} />
@@ -105,13 +103,13 @@ export default async function ReporterThreadPage({ params }: Props) {
           <div className="flex items-center gap-2">
             <MessageSquare className="h-4 w-4 text-muted-foreground" />
             <h2 className="text-sm font-medium text-foreground">
-              Conversation thread
+              কথোপকথন
             </h2>
           </div>
 
           {threadReplies.length === 0 && (
             <p className="text-sm text-muted-foreground py-4 text-center">
-              No replies yet. Check back later.
+              এখনো কোনো উত্তর নেই। পরে আবার দেখে নিও।
             </p>
           )}
 
@@ -125,8 +123,8 @@ export default async function ReporterThreadPage({ params }: Props) {
               }`}
             >
               <p className="text-xs font-medium text-muted-foreground">
-                {r.senderType === "staff" ? "Staff response" : "Your message"} ·{" "}
-                {format(new Date(r.createdAt), "dd MMM yyyy, HH:mm")}
+                {r.senderType === "staff" ? "স্টাফের উত্তর" : "তোমার বার্তা"} ·{" "}
+                {format(new Date(r.createdAt), "dd/MM/yyyy, HH:mm")}
               </p>
               <p className="text-foreground whitespace-pre-wrap">{r.content}</p>
             </div>
@@ -137,16 +135,16 @@ export default async function ReporterThreadPage({ params }: Props) {
 
         {/* Reporter reply form */}
         <div className="space-y-3">
-          <h2 className="text-sm font-medium text-foreground">Add a message</h2>
+          <h2 className="text-sm font-medium text-foreground">বার্তা যোগ করো</h2>
           <ReporterReplyForm caseId={caseId} />
         </div>
 
         <p className="text-xs text-muted-foreground text-center pb-4">
-          This session expires when you close your browser.{" "}
+          ব্রাউজার বন্ধ করলে এই সেশন শেষ হয়ে যাবে।{" "}
           <Link href="/check-in" className="underline hover:text-foreground">
-            Check in again
+            আবার খবর দেখো
           </Link>{" "}
-          anytime with your Case ID and passphrase.
+          যেকোনো সময় কেস আইডি ও পাসফ্রেজ দিয়ে।
         </p>
       </main>
     </div>
@@ -155,9 +153,9 @@ export default async function ReporterThreadPage({ params }: Props) {
 
 function StatusBadge({ status, label }: { status: string; label: string }) {
   const colors: Record<string, string> = {
-    new: "bg-[#e8f0d8] text-[#283618] border-[#606c38]/30",
-    in_review: "bg-[#fef3e2] text-[#bc6c25] border-[#dda15e]/40",
-    resolved: "bg-[#d4e0b8] text-[#283618] border-[#606c38]/50",
+    new: "bg-secondary text-secondary-foreground border-warning/50",
+    in_review: "bg-sidebar-primary/10 text-accent border-sidebar-primary/30",
+    resolved: "bg-success/10 text-success border-success/30",
   };
   return (
     <span

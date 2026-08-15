@@ -2,7 +2,7 @@
 
 import { authClient } from "@/lib/auth-client";
 import { cn } from "@/lib/utils";
-import { FileText, Home, LogOut, ShieldCheck } from "lucide-react";
+import { Home, LogOut, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -12,7 +12,7 @@ interface Props {
 }
 
 const navItems = [
-  { label: "All Reports", href: "/staff/dashboard", icon: Home },
+  { label: "সব রিপোর্ট", href: "/staff/dashboard", icon: Home },
 ];
 
 export function StaffSidebar({ userName, userEmail }: Props) {
@@ -27,7 +27,7 @@ export function StaffSidebar({ userName, userEmail }: Props) {
     <div className="hidden min-[1024px]:flex w-64 h-full flex-col bg-sidebar rounded-r-2xl overflow-hidden">
       <div className="flex h-14 items-center px-5 gap-2.5 border-b border-sidebar-border">
         <ShieldCheck className="h-4 w-4 text-sidebar-primary" />
-        <span className="font-semibold text-sm text-sidebar-foreground">SafeReport Staff</span>
+        <span className="font-semibold text-sm text-sidebar-foreground">SafeReport স্টাফ</span>
       </div>
 
       <nav className="flex flex-col h-full justify-between">
@@ -59,7 +59,7 @@ export function StaffSidebar({ userName, userEmail }: Props) {
             className="flex items-center gap-2.5 w-full rounded-xl px-3 py-2.5 text-sm font-medium text-sidebar-foreground/60 hover:bg-sidebar-accent hover:text-sidebar-foreground transition-colors"
           >
             <LogOut className="h-4 w-4" />
-            Sign out
+            সাইন আউট
           </button>
         </div>
       </nav>

@@ -74,13 +74,13 @@ export const CATEGORIES = [
 export type Category = (typeof CATEGORIES)[number];
 
 export const CATEGORY_LABELS: Record<Category, string> = {
-  bullying_harassment: "Bullying / Harassment",
-  safety_hazard: "Safety Hazard",
-  mental_health_concern: "Mental Health Concern",
-  abuse_exploitation: "Abuse / Exploitation",
-  academic_dishonesty: "Academic Dishonesty",
-  policy_complaint: "Policy Complaint",
-  other: "Other",
+  bullying_harassment: "বুলিং / হয়রানি",
+  safety_hazard: "নিরাপত্তা ঝুঁকি",
+  mental_health_concern: "মানসিক স্বাস্থ্য নিয়ে উদ্বেগ",
+  abuse_exploitation: "নির্যাতন / শোষণ",
+  academic_dishonesty: "পড়াশোনায় অসততা",
+  policy_complaint: "নিয়ম বা নীতিমালা নিয়ে অভিযোগ",
+  other: "অন্যান্য",
 };
 
 // Categories that display an urgency notice on the confirmation screen

@@ -4,9 +4,9 @@ import { ThemeProvider } from "../components/provider";
 import "./globals.css";
  
 export const metadata: Metadata = {
-  title: "SafeReport | Anonymous School Safety Reporting",
+  title: "SafeReport | গোপন স্কুল সেফটি রিপোর্ট",
   description:
-    "Submit anonymous safety, wellbeing, and conduct concerns. No account, name, or contact information required.",
+    "নাম না জানিয়ে নিরাপত্তা, ভালো থাকা বা আচরণ নিয়ে উদ্বেগ জানাও। কোনো অ্যাকাউন্ট, নাম বা যোগাযোগের তথ্য লাগবে না।",
 };
 
 export default function RootLayout({
@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="bn" suppressHydrationWarning>
       <body className="antialiased">
         <ThemeProvider
           attribute="class"

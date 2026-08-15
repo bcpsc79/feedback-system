@@ -12,9 +12,9 @@ import { useState } from "react";
 import { toast } from "sonner";
 
 const OPTIONS = [
-  { value: "new", label: "New" },
-  { value: "in_review", label: "In review" },
-  { value: "resolved", label: "Resolved" },
+  { value: "new", label: "নতুন" },
+  { value: "in_review", label: "পর্যালোচনায়" },
+  { value: "resolved", label: "সমাধান হয়েছে" },
 ];
 
 export function StatusSelector({
@@ -38,14 +38,14 @@ export function StatusSelector({
         body: JSON.stringify({ status: value }),
       });
       if (!res.ok) {
-        toast.error("Could not update status.");
+        toast.error("স্ট্যাটাস বদলানো যায়নি।");
         setStatus(currentStatus);
         return;
       }
-      toast.success("Status updated.");
+      toast.success("স্ট্যাটাস আপডেট হয়েছে।");
       router.refresh();
     } catch {
-      toast.error("Network error.");
+      toast.error("নেটওয়ার্ক সমস্যা হয়েছে।");
       setStatus(currentStatus);
     } finally {
       setSaving(false);
@@ -54,7 +54,7 @@ export function StatusSelector({
 
   return (
     <Select value={status} onValueChange={handleChange} disabled={saving}>
-      <SelectTrigger className="w-36 text-xs h-8">
+      <SelectTrigger className="w-40 text-xs h-8">
         <SelectValue />
       </SelectTrigger>
       <SelectContent>

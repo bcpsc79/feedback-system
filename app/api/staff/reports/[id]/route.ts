@@ -11,7 +11,7 @@ export async function GET(
 ) {
   const session = await auth.api.getSession({ headers: await headers() });
   if (!session?.user) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    return NextResponse.json({ error: "অনুমতি নেই।" }, { status: 401 });
   }
 
   const { id } = await params;
@@ -32,7 +32,7 @@ export async function GET(
     .limit(1);
 
   if (!report) {
-    return NextResponse.json({ error: "Not found" }, { status: 404 });
+    return NextResponse.json({ error: "রিপোর্ট পাওয়া যায়নি।" }, { status: 404 });
   }
 
   const threadReplies = await db

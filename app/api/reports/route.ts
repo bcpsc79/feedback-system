@@ -8,7 +8,7 @@ const categoryEnum = [...CATEGORIES] as [Category, ...Category[]];
 
 const schema = z.object({
   category: z.enum(categoryEnum),
-  content: z.string().min(10, "Please describe the incident in at least 10 characters.").max(5000),
+  content: z.string().min(10, "ঘটনাটি অন্তত ১০ অক্ষরে লিখে বোঝাও।").max(5000),
 });
 
 export async function POST(req: NextRequest) {
@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
   try {
     body = await req.json();
   } catch {
-    return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
+    return NextResponse.json({ error: "অনুরোধটি ঠিকভাবে পড়া যায়নি।" }, { status: 400 });
   }
 
   const parsed = schema.safeParse(body);

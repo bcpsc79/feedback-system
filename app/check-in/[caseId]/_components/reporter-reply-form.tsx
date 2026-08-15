@@ -23,19 +23,19 @@ export function ReporterReplyForm({ caseId }: { caseId: string }) {
         body: JSON.stringify({ content: content.trim() }),
       });
       if (res.status === 401) {
-        toast.error("Session expired. Please check in again.");
+        toast.error("সেশন শেষ হয়েছে। আবার কেস আইডি দিয়ে ঢুকো।");
         router.push("/check-in");
         return;
       }
       if (!res.ok) {
-        toast.error("Failed to send. Please try again.");
+        toast.error("পাঠানো যায়নি। আবার চেষ্টা করো।");
         return;
       }
       setContent("");
-      toast.success("Message sent.");
+      toast.success("বার্তা পাঠানো হয়েছে।");
       router.refresh();
     } catch {
-      toast.error("Network error.");
+      toast.error("নেটওয়ার্ক সমস্যা হয়েছে।");
     } finally {
       setSubmitting(false);
     }
@@ -44,7 +44,7 @@ export function ReporterReplyForm({ caseId }: { caseId: string }) {
   return (
     <form onSubmit={handleSubmit} className="space-y-3">
       <Textarea
-        placeholder="Add information or ask a question. Do not include your name or contact details."
+        placeholder="আরও তথ্য লিখো বা প্রশ্ন করো। নিজের নাম বা যোগাযোগের তথ্য দিও না।"
         value={content}
         onChange={(e) => setContent(e.target.value)}
         rows={4}
@@ -53,7 +53,7 @@ export function ReporterReplyForm({ caseId }: { caseId: string }) {
       />
       <p className="text-xs text-muted-foreground text-right">{content.length}/3000</p>
       <Button type="submit" disabled={submitting || !content.trim()}>
-        {submitting ? "Sending…" : "Send message"}
+        {submitting ? "পাঠানো হচ্ছে..." : "বার্তা পাঠাও"}
       </Button>
     </form>
   );

@@ -35,11 +35,11 @@ export default function ReportPage() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!category) {
-      toast.error("Please select a category.");
+      toast.error("একটি বিষয় বেছে নাও।");
       return;
     }
     if (content.trim().length < 10) {
-      toast.error("Please describe the situation in at least 10 characters.");
+      toast.error("ঘটনাটি অন্তত ১০ অক্ষরে লিখে বোঝাও।");
       return;
     }
 
@@ -54,7 +54,7 @@ export default function ReportPage() {
 
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
-        toast.error(data.error ?? "Submission failed. Please try again.");
+        toast.error(data.error ?? "জমা দেওয়া যায়নি। আবার চেষ্টা করো।");
         return;
       }
 
@@ -63,7 +63,7 @@ export default function ReportPage() {
         `/confirmation?caseId=${encodeURIComponent(caseId)}&passphrase=${encodeURIComponent(passphrase)}&category=${encodeURIComponent(category)}`
       );
     } catch {
-      toast.error("Network error. Please try again.");
+      toast.error("নেটওয়ার্ক সমস্যা হয়েছে। আবার চেষ্টা করো।");
     } finally {
       setSubmitting(false);
     }
@@ -80,7 +80,7 @@ export default function ReportPage() {
           href="/check-in"
           className="text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
-          Check in on a report
+          রিপোর্টের খবর দেখো
         </Link>
       </header>
 
@@ -88,31 +88,31 @@ export default function ReportPage() {
         <div className="w-full max-w-xl">
           <div className="mb-8">
             <h1 className="text-2xl font-semibold text-foreground mb-2">
-              Submit an anonymous report
+              নাম না জানিয়ে রিপোর্ট করো
             </h1>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              Your report is completely anonymous. No account, name, or contact
-              information is required or stored. You will receive a private{" "}
-              <strong>Case ID</strong> and <strong>passphrase</strong> so you
-              can check back for a response.
+              তোমার রিপোর্ট সম্পূর্ণ গোপন থাকবে। কোনো অ্যাকাউন্ট, নাম বা
+              যোগাযোগের তথ্য লাগবে না এবং রাখা হবে না। জমা দেওয়ার পর তুমি একটি
+              ব্যক্তিগত <strong>কেস আইডি</strong> ও <strong>পাসফ্রেজ</strong>{" "}
+              পাবে, যাতে পরে উত্তর দেখতে পারো।
             </p>
           </div>
 
           <Card>
             <CardHeader>
-              <CardTitle className="text-base">Report details</CardTitle>
+              <CardTitle className="text-base">রিপোর্টের বিস্তারিত</CardTitle>
               <CardDescription>
-                Describe the situation as clearly as you can. Staff will review
-                and respond anonymously.
+                যতটা পারো পরিষ্কারভাবে ঘটনাটি লিখো। দায়িত্বপ্রাপ্ত স্টাফ
+                গোপনভাবেই দেখে উত্তর দেবেন।
               </CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="space-y-2">
-                  <Label htmlFor="category">Category</Label>
+                  <Label htmlFor="category">বিষয়</Label>
                   <Select value={category} onValueChange={setCategory}>
                     <SelectTrigger id="category" className="w-full">
-                      <SelectValue placeholder="Select a category…" />
+                      <SelectValue placeholder="একটি বিষয় বেছে নাও..." />
                     </SelectTrigger>
                     <SelectContent>
                       {CATEGORIES.map(([value, label]) => (
@@ -125,10 +125,10 @@ export default function ReportPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="content">Description</Label>
+                  <Label htmlFor="content">ঘটনার বর্ণনা</Label>
                   <Textarea
                     id="content"
-                    placeholder="Describe what happened, when, and where. Do not include your own name or contact details. Your report is anonymous."
+                    placeholder="কি ঘটেছে, কখন ঘটেছে, কোথায় ঘটেছে লিখো। নিজের নাম বা যোগাযোগের তথ্য দিও না। রিপোর্টটি গোপন থাকবে।"
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
                     rows={6}
@@ -142,16 +142,16 @@ export default function ReportPage() {
                 </div>
 
                 <Button type="submit" className="w-full" disabled={submitting}>
-                  {submitting ? "Submitting…" : "Submit report"}
+                  {submitting ? "জমা হচ্ছে..." : "রিপোর্ট জমা দাও"}
                 </Button>
               </form>
             </CardContent>
           </Card>
 
           <p className="mt-6 text-xs text-muted-foreground text-center">
-            Already submitted a report?{" "}
+            আগে রিপোর্ট জমা দিয়েছ?{" "}
             <Link href="/check-in" className="underline hover:text-foreground">
-              Check in with your Case ID
+              কেস আইডি দিয়ে খবর দেখো
             </Link>
           </p>
         </div>

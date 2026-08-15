@@ -59,7 +59,7 @@ export default async function StaffReportPage({ params }: Props) {
           href="/staff/dashboard"
           className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
-          <ArrowLeft className="h-4 w-4" /> All reports
+          <ArrowLeft className="h-4 w-4" /> সব রিপোর্ট
         </Link>
         <span className="text-muted-foreground">/</span>
         <span className="font-mono text-sm text-foreground">{report.id}</span>
@@ -72,8 +72,8 @@ export default async function StaffReportPage({ params }: Props) {
             <div>
               <CardTitle className="text-base">{categoryLabel}</CardTitle>
               <CardDescription>
-                Submitted {format(new Date(report.createdAt), "dd MMM yyyy, HH:mm")}
-                {report.assignedStaffName && ` · Assigned to ${report.assignedStaffName}`}
+                জমা হয়েছে {format(new Date(report.createdAt), "dd/MM/yyyy, HH:mm")}
+                {report.assignedStaffName && ` · দায়িত্বে ${report.assignedStaffName}`}
               </CardDescription>
             </div>
             <StatusSelector reportId={report.id} currentStatus={report.status} />
@@ -88,16 +88,17 @@ export default async function StaffReportPage({ params }: Props) {
 
       {/* Anonymity reminder */}
       <p className="text-xs text-muted-foreground bg-muted/30 border rounded-lg px-4 py-3">
-        <strong>Anonymity reminder:</strong> No reporter name, email, or device information
-        is stored. Reply thoughtfully. The reporter will see your response when they check in.
+        <strong>গোপনীয়তার কথা মনে রাখুন:</strong> রিপোর্টকারীর নাম, ইমেইল বা
+        ডিভাইসের তথ্য রাখা হয় না। ভেবে উত্তর দিন। রিপোর্টকারী কেস আইডি দিয়ে
+        ঢুকলে আপনার উত্তর দেখতে পাবে।
       </p>
 
       {/* Thread */}
       <div className="space-y-3">
-        <h2 className="text-sm font-medium text-foreground">Conversation thread</h2>
+        <h2 className="text-sm font-medium text-foreground">কথোপকথন</h2>
 
         {threadReplies.length === 0 && (
-          <p className="text-sm text-muted-foreground py-3">No messages yet.</p>
+          <p className="text-sm text-muted-foreground py-3">এখনো কোনো বার্তা নেই।</p>
         )}
 
         {threadReplies.map((r) => (
@@ -111,9 +112,9 @@ export default async function StaffReportPage({ params }: Props) {
           >
             <p className="text-xs font-medium text-muted-foreground">
               {r.senderType === "staff"
-                ? `Staff (${r.staffName ?? "unknown"})`
-                : "Anonymous reporter"}{" "}
-              · {format(new Date(r.createdAt), "dd MMM yyyy, HH:mm")}
+                ? `স্টাফ (${r.staffName ?? "অজানা"})`
+                : "গোপন রিপোর্টকারী"}{" "}
+              · {format(new Date(r.createdAt), "dd/MM/yyyy, HH:mm")}
             </p>
             <p className="text-foreground whitespace-pre-wrap">{r.content}</p>
           </div>
@@ -124,7 +125,7 @@ export default async function StaffReportPage({ params }: Props) {
 
       {/* Staff reply form */}
       <div className="space-y-3">
-        <h2 className="text-sm font-medium text-foreground">Reply to reporter</h2>
+        <h2 className="text-sm font-medium text-foreground">রিপোর্টকারীকে উত্তর দিন</h2>
         <StaffReplyForm reportId={report.id} />
       </div>
     </div>

@@ -32,12 +32,12 @@ export default function StaffSignInPage() {
         callbackURL: "/staff/dashboard",
       });
       if (result.error) {
-        toast.error(result.error.message ?? "Incorrect email or password.");
+        toast.error(result.error.message ?? "ইমেইল বা পাসওয়ার্ড ঠিক নয়।");
       } else {
         router.push("/staff/dashboard");
       }
     } catch {
-      toast.error("An error occurred. Please try again.");
+      toast.error("সমস্যা হয়েছে। আবার চেষ্টা করুন।");
     } finally {
       setLoading(false);
     }
@@ -48,27 +48,27 @@ export default function StaffSignInPage() {
       <header className="border-b px-6 py-4 flex items-center gap-2">
         <ShieldCheck className="h-5 w-5 text-primary" />
         <span className="font-semibold text-foreground">SafeReport</span>
-        <span className="text-muted-foreground text-sm">· Staff access</span>
+        <span className="text-muted-foreground text-sm">· স্টাফ অ্যাক্সেস</span>
       </header>
 
       <main className="flex-1 flex items-center justify-center px-4 py-12">
         <div className="w-full max-w-sm">
           <Card>
             <CardHeader>
-              <CardTitle className="text-lg">Staff sign in</CardTitle>
+              <CardTitle className="text-lg">স্টাফ সাইন ইন</CardTitle>
               <CardDescription>
-                This portal is for authorised staff only. Reports are anonymous.
-                No reporter identity is ever stored.
+                এই পোর্টাল শুধু অনুমোদিত স্টাফদের জন্য। রিপোর্টগুলো গোপন থাকে।
+                রিপোর্টকারীর পরিচয় কখনো রাখা হয় না।
               </CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
+                  <Label htmlFor="email">ইমেইল</Label>
                   <Input
                     id="email"
                     type="email"
-                    placeholder="you@school.edu"
+                    placeholder="name@school.edu"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
@@ -76,7 +76,7 @@ export default function StaffSignInPage() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="password">Password</Label>
+                  <Label htmlFor="password">পাসওয়ার্ড</Label>
                   <Input
                     id="password"
                     type="password"
@@ -87,7 +87,7 @@ export default function StaffSignInPage() {
                   />
                 </div>
                 <Button type="submit" className="w-full" disabled={loading}>
-                  {loading ? "Signing in…" : "Sign in"}
+                  {loading ? "সাইন ইন হচ্ছে..." : "সাইন ইন"}
                 </Button>
               </form>
             </CardContent>

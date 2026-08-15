@@ -24,40 +24,40 @@ export default async function StaffDashboardPage() {
     .orderBy(desc(reports.createdAt));
 
   const statusColors: Record<string, string> = {
-    new: "bg-[#e8f0d8] text-[#283618] border-[#606c38]/30",
-    in_review: "bg-[#fef3e2] text-[#bc6c25] border-[#dda15e]/40",
-    resolved: "bg-[#d4e0b8] text-[#283618] border-[#606c38]/50",
+    new: "bg-secondary text-secondary-foreground border-warning/50",
+    in_review: "bg-sidebar-primary/10 text-accent border-sidebar-primary/30",
+    resolved: "bg-success/10 text-success border-success/30",
   };
 
   const statusLabels: Record<string, string> = {
-    new: "New",
-    in_review: "In review",
-    resolved: "Resolved",
+    new: "নতুন",
+    in_review: "পর্যালোচনায়",
+    resolved: "সমাধান হয়েছে",
   };
 
   return (
     <div className="p-6 max-w-5xl mx-auto">
       <div className="mb-6">
-        <h1 className="text-xl font-semibold text-foreground">All Reports</h1>
+        <h1 className="text-xl font-semibold text-foreground">সব রিপোর্ট</h1>
         <p className="text-sm text-muted-foreground mt-1">
-          {rows.length} report{rows.length !== 1 ? "s" : ""} total · No reporter identity is stored or displayed.
+          মোট {rows.length}টি রিপোর্ট · রিপোর্টকারীর পরিচয় রাখা বা দেখানো হয় না।
         </p>
       </div>
 
       {rows.length === 0 ? (
         <div className="text-center py-16 text-muted-foreground text-sm">
-          No reports yet.
+          এখনো কোনো রিপোর্ট নেই।
         </div>
       ) : (
         <div className="rounded-lg border overflow-hidden">
           <table className="w-full text-sm">
             <thead className="bg-muted/50 border-b">
               <tr>
-                <th className="text-left px-4 py-3 font-medium text-muted-foreground">Case ID</th>
-                <th className="text-left px-4 py-3 font-medium text-muted-foreground">Category</th>
-                <th className="text-left px-4 py-3 font-medium text-muted-foreground">Status</th>
-                <th className="text-left px-4 py-3 font-medium text-muted-foreground">Submitted</th>
-                <th className="text-left px-4 py-3 font-medium text-muted-foreground">Assigned to</th>
+                <th className="text-left px-4 py-3 font-medium text-muted-foreground">কেস আইডি</th>
+                <th className="text-left px-4 py-3 font-medium text-muted-foreground">বিষয়</th>
+                <th className="text-left px-4 py-3 font-medium text-muted-foreground">স্ট্যাটাস</th>
+                <th className="text-left px-4 py-3 font-medium text-muted-foreground">জমা হয়েছে</th>
+                <th className="text-left px-4 py-3 font-medium text-muted-foreground">দায়িত্বে</th>
                 <th className="px-4 py-3" />
               </tr>
             </thead>
@@ -79,17 +79,17 @@ export default async function StaffDashboardPage() {
                     </span>
                   </td>
                   <td className="px-4 py-3 text-muted-foreground text-xs">
-                    {format(new Date(report.createdAt), "dd MMM yyyy")}
+                    {format(new Date(report.createdAt), "dd/MM/yyyy")}
                   </td>
                   <td className="px-4 py-3 text-muted-foreground text-xs">
-                    {report.assignedStaffName ?? "None"}
+                    {report.assignedStaffName ?? "কেউ নয়"}
                   </td>
                   <td className="px-4 py-3 text-right">
                     <Link
                       href={`/staff/dashboard/${report.id}`}
                       className="text-primary text-xs font-medium hover:underline"
                     >
-                      View →
+                      দেখুন →
                     </Link>
                   </td>
                 </tr>

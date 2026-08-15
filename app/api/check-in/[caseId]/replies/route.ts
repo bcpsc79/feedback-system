@@ -22,7 +22,7 @@ export async function POST(
   const cookieStore = await cookies();
   const token = cookieStore.get("reporter_token")?.value ?? "";
   if (!verifyReporterToken(token, caseId)) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    return NextResponse.json({ error: "অনুমতি নেই।" }, { status: 401 });
   }
 
   // Confirm the report exists
@@ -33,19 +33,19 @@ export async function POST(
     .limit(1);
 
   if (!report.length) {
-    return NextResponse.json({ error: "Not found" }, { status: 404 });
+    return NextResponse.json({ error: "রিপোর্ট পাওয়া যায়নি।" }, { status: 404 });
   }
 
   let body: unknown;
   try {
     body = await req.json();
   } catch {
-    return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
+    return NextResponse.json({ error: "অনুরোধটি ঠিকভাবে পড়া যায়নি।" }, { status: 400 });
   }
 
   const parsed = schema.safeParse(body);
   if (!parsed.success) {
-    return NextResponse.json({ error: "Content required (max 3000 chars)" }, { status: 422 });
+    return NextResponse.json({ error: "বার্তা লিখতে হবে (সর্বোচ্চ ৩০০০ অক্ষর)।" }, { status: 422 });
   }
 
   // Reporter replies carry no identity fields whatsoever — staffId is null.

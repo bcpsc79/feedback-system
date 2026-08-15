@@ -60,15 +60,15 @@ export default function UserProfile({ mini }: { mini?: boolean }) {
           </Avatar>
           {!mini && (
             <p className="font-medium text-sm">
-              {loading ? "Loading…" : userInfo?.name ?? "Staff"}
+              {loading ? "লোড হচ্ছে..." : userInfo?.name ?? "স্টাফ"}
             </p>
           )}
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-48">
-        <DropdownMenuLabel>{userInfo?.email ?? "Staff"}</DropdownMenuLabel>
+        <DropdownMenuLabel>{userInfo?.email ?? "স্টাফ"}</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={handleSignOut}>Sign out</DropdownMenuItem>
+        <DropdownMenuItem onClick={handleSignOut}>সাইন আউট</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
