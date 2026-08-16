@@ -28,13 +28,13 @@ export function StaffSidebar({ userName, userEmail }: Props) {
   }
 
   return (
-    <div className="hidden min-[1024px]:flex w-64 h-full flex-col bg-sidebar rounded-r-2xl overflow-hidden">
-      <div className="flex h-14 items-center px-5 gap-2.5 border-b border-sidebar-border">
-        <SecurityIcon className="h-4 w-4 text-sidebar-primary" />
-        <span className="font-semibold text-sm text-sidebar-foreground">
-          BCPSC Report System স্টাফ
-        </span>
-      </div>
+<div className="hidden min-[1024px]:flex w-64 h-full flex-col bg-sidebar  overflow-hidden">
+  {/* Centered Brand Container */}
+  <div className="flex h-14 items-center justify-center border-b border-sidebar-border">
+    <span className="font-semibold text-xl text-sidebar-foreground">
+      BCPSC
+    </span>
+  </div>
 
       <nav className="flex flex-col h-full justify-between">
         <div className="p-3 space-y-0.5">

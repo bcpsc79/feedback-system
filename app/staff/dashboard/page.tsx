@@ -89,7 +89,7 @@ export default async function StaffDashboardPage() {
                       href={`/staff/dashboard/${report.id}`}
                       className="text-primary text-xs font-medium hover:underline"
                     >
-                      দেখুন →
+                      বিস্তারিত
                     </Link>
                   </td>
                 </tr>
