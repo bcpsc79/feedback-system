@@ -4,7 +4,6 @@ import { authClient } from "@/lib/auth-client";
 import { cn } from "@/lib/utils";
 import HomeIcon from "@mui/icons-material/Home";
 import LogoutIcon from "@mui/icons-material/Logout";
-import SecurityIcon from "@mui/icons-material/Security";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 

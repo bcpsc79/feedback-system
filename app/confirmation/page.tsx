@@ -11,8 +11,6 @@ import {
 import WarningIcon from "@mui/icons-material/Warning";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-import SecurityIcon from "@mui/icons-material/Security";
-
 import { URGENT_CATEGORIES, type Category } from "@/db/schema";
 import { URGENCY_RESOURCES } from "@/lib/category-routing";
 import Link from "next/link";

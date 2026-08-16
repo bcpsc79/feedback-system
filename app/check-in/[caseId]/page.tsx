@@ -1,6 +1,5 @@
 import { Card, CardContent, CardHeader, Typography, Divider } from "@mui/material";
 import MessageIcon from "@mui/icons-material/Message";
-import SecurityIcon from "@mui/icons-material/Security";
 import { db } from "@/db/drizzle";
 import { CATEGORY_LABELS, replies, reports, type Category } from "@/db/schema";
 import { verifyReporterToken } from "@/lib/reporter-token";
@@ -61,7 +60,6 @@ export default async function ReporterThreadPage({ params }: Props) {
     <div className="min-h-screen bg-background flex flex-col">
       <header className="border-b px-6 py-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <SecurityIcon className="h-5 w-5 text-primary" />
           <Link href="/" className="font-semibold text-foreground hover:text-primary transition-colors">
             BCPSC Report System
           </Link>

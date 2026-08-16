@@ -9,7 +9,6 @@ import {
   TextField,
 } from "@mui/material";
 import { authClient } from "@/lib/auth-client";
-import SecurityIcon from "@mui/icons-material/Security";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
