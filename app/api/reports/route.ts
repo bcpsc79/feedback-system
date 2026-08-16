@@ -9,6 +9,7 @@ const categoryEnum = [...CATEGORIES] as [Category, ...Category[]];
 const schema = z.object({
   category: z.enum(categoryEnum),
   content: z.string().min(10, "ঘটনাটি অন্তত ১০ অক্ষরে লিখে বোঝাও।").max(5000),
+  imageIds: z.array(z.string()).optional(),
 });
 
 export async function POST(req: NextRequest) {
@@ -26,7 +27,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: parsed.error.flatten().fieldErrors }, { status: 422 });
   }
 
-  const { category, content } = parsed.data;
+  const { category, content, imageIds } = parsed.data;
   const caseId = generateCaseId();
   const passphrase = generatePassphrase();
   const passphraseHash = await hashPassphrase(passphrase);
@@ -35,6 +36,7 @@ export async function POST(req: NextRequest) {
     id: caseId,
     category,
     content,
+    imageId: imageIds?.length ? imageIds.join(",") : null,
     passphraseHash,
     status: "new",
   });

@@ -107,6 +107,7 @@ export const reports = pgTable("reports", {
   id: text("id").primaryKey(),             // nanoid — shown to reporter as their Case ID
   category: text("category").notNull(),
   content: text("content").notNull(),
+  imageId: text("image_id"),               // optional Cloudinary public_id for evidence
   passphraseHash: text("passphrase_hash").notNull(), // scrypt hash; plaintext never stored
   status: reportStatusEnum("status").notNull().default("new"),
   assignedStaffId: text("assigned_staff_id").references(() => user.id, {
