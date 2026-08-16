@@ -1,4 +1,4 @@
--- SafeReport initial schema
+-- BCPSC Report System initial schema
 -- Replaces the starter-kit's original migration.
 -- Run via: npm run db:migrate
 

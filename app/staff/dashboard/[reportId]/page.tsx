@@ -6,9 +6,8 @@ import { format } from "date-fns";
 import { headers } from "next/headers";
 import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { Card, CardContent, CardHeader, Divider } from "@mui/material";
 import { StaffReplyForm } from "./_components/staff-reply-form";
 import { StatusSelector } from "./_components/status-selector";
 
@@ -59,7 +58,7 @@ export default async function StaffReportPage({ params }: Props) {
           href="/staff/dashboard"
           className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
-          <ArrowLeft className="h-4 w-4" /> সব রিপোর্ট
+          <ArrowBackIcon sx={{ fontSize: 16 }} /> সব রিপোর্ট
         </Link>
         <span className="text-muted-foreground">/</span>
         <span className="font-mono text-sm text-foreground">{report.id}</span>
@@ -67,18 +66,18 @@ export default async function StaffReportPage({ params }: Props) {
 
       {/* Report details */}
       <Card>
-        <CardHeader>
-          <div className="flex items-start justify-between gap-4 flex-wrap">
-            <div>
-              <CardTitle className="text-base">{categoryLabel}</CardTitle>
-              <CardDescription>
-                জমা হয়েছে {format(new Date(report.createdAt), "dd/MM/yyyy, HH:mm")}
-                {report.assignedStaffName && ` · দায়িত্বে ${report.assignedStaffName}`}
-              </CardDescription>
-            </div>
-            <StatusSelector reportId={report.id} currentStatus={report.status} />
-          </div>
-        </CardHeader>
+        <CardHeader
+          title={categoryLabel}
+          titleTypographyProps={{ variant: 'subtitle1', fontWeight: 'bold' }}
+          subheader={
+            <>
+              জমা হয়েছে {format(new Date(report.createdAt), "dd/MM/yyyy, HH:mm")}
+              {report.assignedStaffName && ` · দায়িত্বে ${report.assignedStaffName}`}
+            </>
+          }
+          subheaderTypographyProps={{ variant: 'body2', color: 'text.secondary' }}
+          action={<StatusSelector reportId={report.id} currentStatus={report.status} />}
+        />
         <CardContent>
           <p className="text-sm text-foreground whitespace-pre-wrap leading-relaxed">
             {report.content}
@@ -121,7 +120,7 @@ export default async function StaffReportPage({ params }: Props) {
         ))}
       </div>
 
-      <Separator />
+      <Divider />
 
       {/* Staff reply form */}
       <div className="space-y-3">

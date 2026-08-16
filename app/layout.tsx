@@ -1,13 +1,21 @@
-import { Toaster } from "@/components/ui/sonner";
+import { Toaster } from "sonner";
 import type { Metadata } from "next";
 import { ThemeProvider } from "../components/provider";
 import "./globals.css";
- 
+
 export const metadata: Metadata = {
-  title: "SafeReport | গোপন স্কুল সেফটি রিপোর্ট",
+  title: "BCPSC Report System | গোপন স্কুল সেফটি রিপোর্ট",
   description:
     "নাম না জানিয়ে নিরাপত্তা, ভালো থাকা বা আচরণ নিয়ে উদ্বেগ জানাও। কোনো অ্যাকাউন্ট, নাম বা যোগাযোগের তথ্য লাগবে না।",
 };
+
+import { Anek_Bangla } from "next/font/google";
+
+const anekBangla = Anek_Bangla({
+  subsets: ["bengali"],
+  display: "swap",
+  variable: "--font-anek-bangla",
+});
 
 export default function RootLayout({
   children,
@@ -16,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="bn" suppressHydrationWarning>
-      <body className="antialiased">
+      <body className={`${anekBangla.className} antialiased`}>
         <ThemeProvider>
           {children}
           <Toaster />

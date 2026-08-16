@@ -1,28 +1,23 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import {
+  Button,
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import {
+  Typography,
   Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
+  MenuItem,
+  TextField,
+  InputLabel,
+  FormControl,
+} from "@mui/material";
 import { CATEGORY_LABELS } from "@/db/schema";
-import { ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
+import Image from 'next/image';
 
 const CATEGORIES = Object.entries(CATEGORY_LABELS) as [string, string][];
 
@@ -60,7 +55,7 @@ export default function ReportPage() {
 
       const { caseId, passphrase } = await res.json();
       router.push(
-        `/confirmation?caseId=${encodeURIComponent(caseId)}&passphrase=${encodeURIComponent(passphrase)}&category=${encodeURIComponent(category)}`
+        `/confirmation?caseId=${encodeURIComponent(caseId)}&passphrase=${encodeURIComponent(passphrase)}&category=${encodeURIComponent(category)}`,
       );
     } catch {
       toast.error("নেটওয়ার্ক সমস্যা হয়েছে। আবার চেষ্টা করো।");
@@ -71,26 +66,36 @@ export default function ReportPage() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <header className="border-b px-6 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <ShieldCheck className="h-5 w-5 text-primary" />
-          <span className="font-semibold text-foreground">SafeReport</span>
-        </div>
-        <Link
-          href="/check-in"
-          className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-        >
-          রিপোর্টের খবর দেখো
-        </Link>
-      </header>
+    <header className="border-b px-8 py-4 flex items-center justify-between">
+      {/* Brand & Logo Container */}
+      <div className="flex items-center gap-2">
+        <Image
+          src="/logo.jpg"     // References public/logo.jpg automatically
+          alt="BCPSC Logo"
+          width={37}          // Adjust width as needed (32px = h-8)
+          height={37}         // Adjust height as needed
+          className="object-contain rounded-md" // Optional styling: smooths sharp image edges
+          priority            // Ensures the navbar logo loads instantly without layout shifts
+        />
+      </div>
+      
+<Link
+  href="/check-in"
+  className="text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2 rounded-md transition-colors shadow-sm"
+>
+  রিপোর্টের খবর দেখো
+</Link>
+
+    </header>
+
 
       <main className="flex-1 flex items-start justify-center px-4 py-12">
         <div className="w-full max-w-xl">
-          <div className="mb-8">
+          <div className="mb-8 text-center">
             <h1 className="text-2xl font-semibold text-foreground mb-2">
               নাম না জানিয়ে রিপোর্ট করো
             </h1>
-            <p className="text-muted-foreground text-sm leading-relaxed">
+            <p className="text-muted-foreground text-sm leading-relaxed max-w-md mx-auto">
               তোমার রিপোর্ট সম্পূর্ণ গোপন থাকবে। কোনো অ্যাকাউন্ট, নাম বা
               যোগাযোগের তথ্য লাগবে না এবং রাখা হবে না। জমা দেওয়ার পর তুমি একটি
               ব্যক্তিগত <strong>কেস আইডি</strong> ও <strong>পাসফ্রেজ</strong>{" "}
@@ -99,49 +104,72 @@ export default function ReportPage() {
           </div>
 
           <Card>
-            <CardHeader>
-              <CardTitle className="text-base">রিপোর্টের বিস্তারিত</CardTitle>
-              <CardDescription>
-                যতটা পারো পরিষ্কারভাবে ঘটনাটি লিখো। দায়িত্বপ্রাপ্ত স্টাফ
-                গোপনভাবেই দেখে উত্তর দেবেন।
-              </CardDescription>
-            </CardHeader>
+            <CardHeader
+              title={
+                <Typography variant="h6" className="text-base" align="center">
+                  রিপোর্টের বিস্তারিত
+                </Typography>
+              }
+              subheader={
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  align="center"
+                >
+                  যতটা পারো পরিষ্কারভাবে ঘটনাটি লিখো। দায়িত্বপ্রাপ্ত স্টাফ
+                  গোপনভাবেই দেখে উত্তর দেবেন।
+                </Typography>
+              }
+            />
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="space-y-2">
-                  <Label htmlFor="category">বিষয়</Label>
-                  <Select value={category} onValueChange={setCategory}>
-                    <SelectTrigger id="category" className="w-full">
-                      <SelectValue placeholder="একটি বিষয় বেছে নাও..." />
-                    </SelectTrigger>
-                    <SelectContent>
+                  <FormControl fullWidth size="small">
+                    <InputLabel id="category-label">বিষয়</InputLabel>
+                    <Select
+                      labelId="category-label"
+                      id="category"
+                      value={category}
+                      label="বিষয়"
+                      onChange={(e) => setCategory(e.target.value)}
+                    >
+                      <MenuItem value="" disabled>
+                        <em>একটি বিষয় বেছে নাও...</em>
+                      </MenuItem>
                       {CATEGORIES.map(([value, label]) => (
-                        <SelectItem key={value} value={value}>
+                        <MenuItem key={value} value={value}>
                           {label}
-                        </SelectItem>
+                        </MenuItem>
                       ))}
-                    </SelectContent>
-                  </Select>
+                    </Select>
+                  </FormControl>
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="content">ঘটনার বর্ণনা</Label>
-                  <Textarea
+                  <TextField
+                    fullWidth
                     id="content"
+                    label="ঘটনার বর্ণনা"
                     placeholder="কি ঘটেছে, কখন ঘটেছে, কোথায় ঘটেছে লিখো। নিজের নাম বা যোগাযোগের তথ্য দিও না। রিপোর্টটি গোপন থাকবে।"
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
+                    multiline
                     rows={6}
-                    maxLength={5000}
-                    className="resize-none"
+                    inputProps={{ maxLength: 5000 }}
                     required
+                    size="small"
                   />
                   <p className="text-xs text-muted-foreground text-right">
                     {content.length}/5000
                   </p>
                 </div>
 
-                <Button type="submit" className="w-full" disabled={submitting}>
+                <Button
+                  variant="contained"
+                  type="submit"
+                  fullWidth
+                  disabled={submitting}
+                >
                   {submitting ? "জমা হচ্ছে..." : "রিপোর্ট জমা দাও"}
                 </Button>
               </form>

@@ -1,11 +1,10 @@
 "use client";
 
 import { CssBaseline, ThemeProvider as MuiThemeProvider, createTheme } from "@mui/material";
-import { Roboto } from "next/font/google";
+import { Anek_Bangla } from "next/font/google";
 
-const roboto = Roboto({
-    weight: ["400", "500", "700"],
-    subsets: ["latin"],
+const anekBangla = Anek_Bangla({
+    subsets: ["bengali"],
     display: "swap",
 });
 
@@ -37,10 +36,10 @@ const theme = createTheme({
         divider: "#dfe5f2",
     },
     shape: {
-        borderRadius: 18,
+        borderRadius: 8,
     },
     typography: {
-        fontFamily: roboto.style.fontFamily,
+        fontFamily: anekBangla.style.fontFamily,
         h1: { fontSize: "clamp(2.6rem, 6vw, 5rem)", fontWeight: 700, lineHeight: 1.02 },
         h4: { fontSize: "clamp(2rem, 4vw, 3rem)", fontWeight: 700, lineHeight: 1.1 },
         h5: { fontSize: "1.7rem", fontWeight: 700 },
@@ -52,7 +51,7 @@ const theme = createTheme({
             defaultProps: { size: "large", variant: "contained", disableElevation: true },
             styleOverrides: {
                 root: {
-                    borderRadius: 999,
+                    borderRadius: 8,
                     minHeight: 52,
                     paddingInline: 24,
                     fontSize: "1rem",
@@ -74,14 +73,44 @@ const theme = createTheme({
         MuiOutlinedInput: {
             styleOverrides: {
                 root: {
-                    borderRadius: 16,
+                    borderRadius: 8,
                     backgroundColor: "#fff",
+                },
+            },
+        },
+        MuiButtonBase: {
+            defaultProps: { disableTouchRipple: true },
+        },
+        MuiMenuItem: {
+            styleOverrides: {
+                root: {
+                    // Prevent sticky hover states on mobile touch
+                    "@media (hover: none)": {
+                        "&:hover": {
+                            backgroundColor: "transparent",
+                        },
+                        "&.Mui-focusVisible": {
+                            backgroundColor: "transparent",
+                        }
+                    },
+                },
+            },
+        },
+        MuiSelect: {
+            defaultProps: {
+                MenuProps: {
+                    disableScrollLock: true,
+                    PaperProps: {
+                        style: {
+                            maxHeight: 300,
+                        },
+                    },
                 },
             },
         },
         MuiChip: {
             styleOverrides: {
-                root: { fontWeight: 700, borderRadius: 999 },
+                root: { fontWeight: 700, borderRadius: 8 },
             },
         },
     },

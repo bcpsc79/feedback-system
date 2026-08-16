@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Select, MenuItem, FormControl } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -53,17 +47,18 @@ export function StatusSelector({
   }
 
   return (
-    <Select value={status} onValueChange={handleChange} disabled={saving}>
-      <SelectTrigger className="w-40 text-xs h-8">
-        <SelectValue />
-      </SelectTrigger>
-      <SelectContent>
+    <FormControl size="small" sx={{ width: 160 }} disabled={saving}>
+      <Select
+        value={status}
+        onChange={(e) => handleChange(e.target.value as string)}
+        sx={{ fontSize: '0.75rem', height: 32 }}
+      >
         {OPTIONS.map((o) => (
-          <SelectItem key={o.value} value={o.value} className="text-xs">
+          <MenuItem key={o.value} value={o.value} sx={{ fontSize: '0.75rem' }}>
             {o.label}
-          </SelectItem>
+          </MenuItem>
         ))}
-      </SelectContent>
-    </Select>
+      </Select>
+    </FormControl>
   );
 }

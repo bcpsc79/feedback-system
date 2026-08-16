@@ -1,9 +1,10 @@
-import { Card, CardContent, Typography, Divider } from "@mui/material";
+import { Card, CardContent, CardHeader, Typography, Divider } from "@mui/material";
+import MessageIcon from "@mui/icons-material/Message";
+import SecurityIcon from "@mui/icons-material/Security";
 import { db } from "@/db/drizzle";
 import { CATEGORY_LABELS, replies, reports, type Category } from "@/db/schema";
 import { verifyReporterToken } from "@/lib/reporter-token";
 import { format } from "date-fns";
-import { MessageSquare, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import { cookies } from "next/headers";
 import { notFound, redirect } from "next/navigation";
@@ -60,9 +61,9 @@ export default async function ReporterThreadPage({ params }: Props) {
     <div className="min-h-screen bg-background flex flex-col">
       <header className="border-b px-6 py-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <ShieldCheck className="h-5 w-5 text-primary" />
+          <SecurityIcon className="h-5 w-5 text-primary" />
           <Link href="/" className="font-semibold text-foreground hover:text-primary transition-colors">
-            SafeReport
+            BCPSC Report System
           </Link>
         </div>
         <span className="text-xs text-muted-foreground font-mono">
@@ -73,28 +74,22 @@ export default async function ReporterThreadPage({ params }: Props) {
       <main className="flex-1 px-4 py-8 max-w-2xl mx-auto w-full space-y-5">
         {/* Report summary */}
         <Card>
-          <CardHeader>
-            <div className="flex items-start justify-between gap-4 flex-wrap">
-              <div>
-                <CardTitle className="text-base">{categoryLabel}</CardTitle>
-                <CardDescription className="mt-1">
-                  জমা হয়েছে {format(new Date(report.createdAt), "dd/MM/yyyy")}
-                </CardDescription>
-              </div>
-              <StatusBadge status={report.status} label={statusLabel[report.status] ?? report.status} />
-            </div>
-          </CardHeader>
+          <CardHeader
+            title={<Typography variant="h6" component="div" className="text-base font-semibold">{categoryLabel}</Typography>}
+            subheader={<Typography variant="body2" className="mt-1">জমা হয়েছে {format(new Date(report.createdAt), "dd/MM/yyyy")}</Typography>}
+            action={<StatusBadge status={report.status} label={statusLabel[report.status] ?? report.status} />}
+          />
           <CardContent>
-            <p className="text-sm text-foreground whitespace-pre-wrap">
+            <Typography variant="body2" className="whitespace-pre-wrap">
               {report.content}
-            </p>
+            </Typography>
           </CardContent>
         </Card>
 
         {/* Thread */}
         <div className="space-y-3">
           <div className="flex items-center gap-2">
-            <MessageSquare className="h-4 w-4 text-muted-foreground" />
+            <MessageIcon className="h-4 w-4 text-muted-foreground" />
             <h2 className="text-sm font-medium text-foreground">
               কথোপকথন
             </h2>
@@ -124,7 +119,7 @@ export default async function ReporterThreadPage({ params }: Props) {
           ))}
         </div>
 
-        <Separator />
+        <Divider />
 
         {/* Reporter reply form */}
         <div className="space-y-3">

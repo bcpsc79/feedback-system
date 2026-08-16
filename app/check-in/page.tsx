@@ -1,16 +1,12 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { ShieldCheck } from "lucide-react";
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardHeader from "@mui/material/CardHeader";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import SecurityIcon from "@mui/icons-material/Security";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -34,7 +30,10 @@ export default function CheckInPage() {
       const res = await fetch("/api/check-in", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ caseId: caseId.trim().toUpperCase(), passphrase: passphrase.trim() }),
+        body: JSON.stringify({
+          caseId: caseId.trim().toUpperCase(),
+          passphrase: passphrase.trim(),
+        }),
       });
 
       if (res.status === 401) {
@@ -59,9 +58,12 @@ export default function CheckInPage() {
     <div className="min-h-screen bg-background flex flex-col">
       <header className="border-b px-6 py-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <ShieldCheck className="h-5 w-5 text-primary" />
-          <Link href="/" className="font-semibold text-foreground hover:text-primary transition-colors">
-            SafeReport
+          <SecurityIcon className="h-5 w-5 text-primary" />
+          <Link
+            href="/"
+            className="font-semibold text-foreground hover:text-primary transition-colors"
+          >
+            BCPSC Report System
           </Link>
         </div>
       </header>
@@ -77,44 +79,90 @@ export default function CheckInPage() {
             </p>
           </div>
 
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-base">রিপোর্ট দেখার তথ্য</CardTitle>
-              <CardDescription>
-                এই তথ্যগুলো রিপোর্ট জমা দেওয়ার পর একবারই দেখানো হয়েছিল। কোনো
-                অ্যাকাউন্ট লাগবে না।
-              </CardDescription>
-            </CardHeader>
+          <Card variant="outlined" className="bg-card text-card-foreground">
+            <CardHeader
+              title={
+                <Typography
+                  variant="h6"
+                  className="text-base font-semibold"
+                  align="center"
+                >
+                  রিপোর্ট দেখার তথ্য
+                </Typography>
+              }
+              subheader={
+                <Typography
+                  variant="body2"
+                  className="text-muted-foreground"
+                  align="center"
+                >
+                  এই তথ্যগুলো রিপোর্ট জমা দেওয়ার পর একবারই দেখানো হয়েছিল। কোনো
+                  অ্যাকাউন্ট লাগবে না।
+                </Typography>
+              }
+            />
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="caseId">কেস আইডি</Label>
-                  <Input
+                  <Typography
+                    variant="subtitle2"
+                    component="label"
+                    htmlFor="caseId"
+                    className="font-medium text-foreground"
+                  >
+                    কেস আইডি
+                  </Typography>
+                  <TextField
                     id="caseId"
                     placeholder="যেমন A3K7M2PQ5N"
                     value={caseId}
                     onChange={(e) => setCaseId(e.target.value.toUpperCase())}
                     autoComplete="off"
-                    autoCorrect="off"
-                    spellCheck={false}
-                    maxLength={20}
+                    inputProps={{
+                      autoCorrect: "off",
+                      spellCheck: false,
+                      maxLength: 20,
+                    }}
+                    variant="outlined"
+                    size="small"
+                    fullWidth
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="passphrase">পাসফ্রেজ</Label>
-                  <Input
+                  <Typography
+                    variant="subtitle2"
+                    component="label"
+                    htmlFor="passphrase"
+                    className="font-medium text-foreground"
+                  >
+                    পাসফ্রেজ
+                  </Typography>
+                  <TextField
                     id="passphrase"
                     placeholder="যেমন tiger maple frost noble"
                     value={passphrase}
-                    onChange={(e) => setPassphrase(e.target.value.toLowerCase())}
+                    onChange={(e) =>
+                      setPassphrase(e.target.value.toLowerCase())
+                    }
                     autoComplete="off"
-                    autoCorrect="off"
-                    spellCheck={false}
+                    inputProps={{
+                      autoCorrect: "off",
+                      spellCheck: false,
+                    }}
+                    variant="outlined"
+                    size="small"
+                    fullWidth
                   />
                 </div>
 
-                <Button type="submit" className="w-full" disabled={loading}>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  disableElevation
+                  className="w-full normal-case bg-primary text-primary-foreground hover:bg-primary/90"
+                  disabled={loading}
+                >
                   {loading ? "যাচাই হচ্ছে..." : "আমার রিপোর্ট দেখাও"}
                 </Button>
               </form>

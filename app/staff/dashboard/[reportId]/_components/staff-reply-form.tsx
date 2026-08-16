@@ -1,7 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
+import { Button, TextField, Typography, Box } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -37,19 +36,26 @@ export function StaffReplyForm({ reportId }: { reportId: string }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-3">
-      <Textarea
+    <Box component="form" onSubmit={handleSubmit} sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
+      <TextField
         placeholder="রিপোর্টকারীকে উত্তর লিখুন। তারা কেস আইডি দিয়ে ঢুকলে এই উত্তর দেখতে পাবে।"
         value={content}
         onChange={(e) => setContent(e.target.value)}
+        multiline
         rows={5}
-        maxLength={3000}
-        className="resize-none"
+        inputProps={{ maxLength: 3000 }}
+        fullWidth
       />
-      <p className="text-xs text-muted-foreground text-right">{content.length}/3000</p>
-      <Button type="submit" disabled={submitting || !content.trim()}>
+      <Typography variant="caption" color="text.secondary" align="right" display="block">
+        {content.length}/3000
+      </Typography>
+      <Button 
+        type="submit" 
+        variant="contained" 
+        disabled={submitting || !content.trim()}
+      >
         {submitting ? "পাঠানো হচ্ছে..." : "উত্তর পাঠান"}
       </Button>
-    </form>
+    </Box>
   );
 }
