@@ -2,14 +2,9 @@ import { auth } from "@/lib/auth";
 import { db } from "@/db/drizzle";
 import { CATEGORY_LABELS, replies, reports, user, type Category } from "@/db/schema";
 import { eq } from "drizzle-orm";
-import { format } from "date-fns";
 import { headers } from "next/headers";
 import { notFound, redirect } from "next/navigation";
-import Link from "next/link";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { Card, CardContent, CardHeader, Divider } from "@mui/material";
-import { StaffReplyForm } from "./_components/staff-reply-form";
-import { StatusSelector } from "./_components/status-selector";
+import { StaffReportUI } from "./_components/staff-report-ui";
 
 type Props = { params: Promise<{ reportId: string }> };
 
@@ -52,81 +47,10 @@ export default async function StaffReportPage({ params }: Props) {
   const categoryLabel = CATEGORY_LABELS[report.category as Category] ?? report.category;
 
   return (
-    <div className="p-6 max-w-3xl mx-auto space-y-5">
-      <div className="flex items-center gap-3">
-        <Link
-          href="/staff/dashboard"
-          className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
-        >
-          <ArrowBackIcon sx={{ fontSize: 16 }} /> সব রিপোর্ট
-        </Link>
-        <span className="text-muted-foreground">/</span>
-        <span className="font-mono text-sm text-foreground">{report.id}</span>
-      </div>
-
-      {/* Report details */}
-      <Card>
-        <CardHeader
-          title={categoryLabel}
-          titleTypographyProps={{ variant: 'subtitle1', fontWeight: 'bold' }}
-          subheader={
-            <>
-              জমা হয়েছে {format(new Date(report.createdAt), "dd/MM/yyyy, HH:mm")}
-              {report.assignedStaffName && ` · দায়িত্বে ${report.assignedStaffName}`}
-            </>
-          }
-          subheaderTypographyProps={{ variant: 'body2', color: 'text.secondary' }}
-          action={<StatusSelector reportId={report.id} currentStatus={report.status} />}
-        />
-        <CardContent>
-          <p className="text-sm text-foreground whitespace-pre-wrap leading-relaxed">
-            {report.content}
-          </p>
-        </CardContent>
-      </Card>
-
-      {/* Anonymity reminder */}
-      <p className="text-xs text-muted-foreground bg-muted/30 border rounded-lg px-4 py-3">
-        <strong>গোপনীয়তার কথা মনে রাখুন:</strong> রিপোর্টকারীর নাম, ইমেইল বা
-        ডিভাইসের তথ্য রাখা হয় না। ভেবে উত্তর দিন। রিপোর্টকারী কেস আইডি দিয়ে
-        ঢুকলে আপনার উত্তর দেখতে পাবে।
-      </p>
-
-      {/* Thread */}
-      <div className="space-y-3">
-        <h2 className="text-sm font-medium text-foreground">কথোপকথন</h2>
-
-        {threadReplies.length === 0 && (
-          <p className="text-sm text-muted-foreground py-3">এখনো কোনো বার্তা নেই।</p>
-        )}
-
-        {threadReplies.map((r) => (
-          <div
-            key={r.id}
-            className={`rounded-lg border p-4 text-sm space-y-1 ${
-              r.senderType === "staff"
-                ? "bg-primary/5 border-primary/20"
-                : "bg-muted/30"
-            }`}
-          >
-            <p className="text-xs font-medium text-muted-foreground">
-              {r.senderType === "staff"
-                ? `স্টাফ (${r.staffName ?? "অজানা"})`
-                : "গোপন রিপোর্টকারী"}{" "}
-              · {format(new Date(r.createdAt), "dd/MM/yyyy, HH:mm")}
-            </p>
-            <p className="text-foreground whitespace-pre-wrap">{r.content}</p>
-          </div>
-        ))}
-      </div>
-
-      <Divider />
-
-      {/* Staff reply form */}
-      <div className="space-y-3">
-        <h2 className="text-sm font-medium text-foreground">রিপোর্টকারীকে উত্তর দিন</h2>
-        <StaffReplyForm reportId={report.id} />
-      </div>
-    </div>
+    <StaffReportUI 
+      report={report} 
+      categoryLabel={categoryLabel} 
+      threadReplies={threadReplies} 
+    />
   );
 }
