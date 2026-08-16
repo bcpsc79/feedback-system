@@ -1,11 +1,7 @@
 /**
- * Creates a staff user directly in the database (no running server needed).
+ * Creates a staff user directly via the running Next.js server.
  * Usage: npx tsx scripts/create-staff.ts <email> <password> <name>
  */
-import { config } from "dotenv";
-config({ path: ".env.local" });
-
-import { auth } from "../lib/auth";
 
 async function main() {
   const [, , email, password, name = "Staff"] = process.argv;
@@ -15,12 +11,17 @@ async function main() {
     process.exit(1);
   }
 
-  const result = await auth.api.signUpEmail({
-    body: { email, password, name },
+  const res = await fetch("http://localhost:3000/api/auth/sign-up/email", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email, password, name }),
   });
 
-  if (!result?.user) {
-    console.error("Failed to create user:", result);
+  if (!res.ok) {
+    const errorText = await res.text();
+    console.error("Failed to create user:", errorText);
     process.exit(1);
   }
 
