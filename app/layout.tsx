@@ -27,7 +27,7 @@ export default function RootLayout({
       <body className={`${anekBangla.className} antialiased`}>
         <ThemeProvider>
           {children}
-          <Toaster />
+          <Toaster toastOptions={{ style: { fontFamily: anekBangla.style.fontFamily } }} />
         </ThemeProvider>
       </body>
     </html>

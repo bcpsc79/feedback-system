@@ -19,6 +19,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
 import { toast } from "sonner";
+import Image from "next/image";
 
 function ConfirmationContent() {
   const params = useSearchParams();
@@ -52,11 +53,25 @@ function ConfirmationContent() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <header className="border-b px-6 py-4 flex items-center gap-2">
-        <SecurityIcon className="h-5 w-5 text-primary" />
-        <span className="font-semibold text-foreground">
-          BCPSC Report System
-        </span>
+      <header className="border-b px-8 py-4 flex items-center justify-between">
+        {/* Brand & Logo Container */}
+        <div className="flex items-center gap-2">
+          <Image
+            src="/logo.jpg"     // References public/logo.jpg automatically
+            alt="BCPSC Logo"
+            width={37}          // Adjust width as needed (32px = h-8)
+            height={37}         // Adjust height as needed
+            className="object-contain rounded-md" // Optional styling: smooths sharp image edges
+            priority            // Ensures the navbar logo loads instantly without layout shifts
+          />
+        </div>
+        
+        <Link
+          href="/check-in"
+          className="text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2 rounded-md transition-colors shadow-sm"
+        >
+          রিপোর্টের খবর দেখো
+        </Link>
       </header>
 
       <main className="flex-1 flex items-start justify-center px-4 py-12">
@@ -118,19 +133,19 @@ function ConfirmationContent() {
           <Card>
             <CardHeader
               title={
-                <Typography variant="subtitle1" fontWeight="bold">
+                <Typography variant="subtitle1" fontWeight="bold" align="center">
                   রিপোর্ট দেখার তথ্য সংরক্ষণ করো
                 </Typography>
               }
               subheader={
-                <Typography variant="body2">
+                <Typography variant="body2" align="center">
                   এগুলো <strong>শুধু একবার</strong> দেখানো হয়। লিখে রাখো বা
                   নিরাপদ কোথাও কপি করে রাখো। পরে রিপোর্টের খবর দেখতে দুটোই
                   লাগবে।
                 </Typography>
               }
             />
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-4 text-center">
               <div className="space-y-1">
                 <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
                   কেস আইডি
@@ -162,7 +177,7 @@ function ConfirmationContent() {
           </Card>
 
           <Card className="bg-muted/30">
-            <CardContent className="pt-4 text-sm text-muted-foreground space-y-2">
+            <CardContent className="pt-4 text-sm text-muted-foreground space-y-2 text-center">
               <p>
                 <strong className="text-foreground">তোমার গোপনীয়তা:</strong> এই
                 রিপোর্টের সঙ্গে কোনো নাম, ইমেইল, IP address বা ডিভাইসের তথ্য
@@ -181,7 +196,7 @@ function ConfirmationContent() {
             </CardContent>
           </Card>
 
-          <div className="flex gap-3 mt-4">
+          <div className="flex flex-col sm:flex-row gap-3 mt-4">
             <Button
               component={Link}
               href="/check-in"

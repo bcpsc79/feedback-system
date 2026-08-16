@@ -18,6 +18,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 import Image from 'next/image';
+import { CldUploadWidget } from "next-cloudinary";
 
 const CATEGORIES = Object.entries(CATEGORY_LABELS) as [string, string][];
 
@@ -25,6 +26,7 @@ export default function ReportPage() {
   const router = useRouter();
   const [category, setCategory] = useState("");
   const [content, setContent] = useState("");
+  const [imageIds, setImageIds] = useState<string[]>([]);
   const [submitting, setSubmitting] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
@@ -44,7 +46,7 @@ export default function ReportPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         // No cookies, no credentials — purely anonymous
-        body: JSON.stringify({ category, content: content.trim() }),
+        body: JSON.stringify({ category, content: content.trim(), imageIds }),
       });
 
       if (!res.ok) {
@@ -67,17 +69,19 @@ export default function ReportPage() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
     <header className="border-b px-8 py-4 flex items-center justify-between">
-      {/* Brand & Logo Container */}
-      <div className="flex items-center gap-2">
+      <Link 
+        href="/" 
+        className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+      >
         <Image
-          src="/logo.jpg"     // References public/logo.jpg automatically
+          src="/logo.jpg"
           alt="BCPSC Logo"
-          width={37}          // Adjust width as needed (32px = h-8)
-          height={37}         // Adjust height as needed
-          className="object-contain rounded-md" // Optional styling: smooths sharp image edges
-          priority            // Ensures the navbar logo loads instantly without layout shifts
+          width={37}
+          height={37}
+          className="object-contain rounded-md"
+          priority
         />
-      </div>
+      </Link>
       
 <Link
   href="/check-in"
@@ -162,6 +166,87 @@ export default function ReportPage() {
                   <p className="text-xs text-muted-foreground text-right">
                     {content.length}/5000
                   </p>
+                </div>
+
+                <div className="space-y-2">
+                  <InputLabel className="text-sm font-medium">ছবি যোগ করো (সর্বোচ্চ ৬টি)</InputLabel>
+                  <div className="border border-dashed border-gray-300 rounded-lg p-4 flex flex-col items-center justify-center bg-gray-50/50">
+                    <CldUploadWidget 
+                      uploadPreset="ml_default" 
+                      options={{
+                        multiple: true,
+                        maxFiles: 6,
+                      }}
+                      onSuccess={(result: any) => {
+                        if (result?.info?.public_id) {
+                          setImageIds(prev => {
+                            // Don't add duplicates and respect max 6
+                            if (prev.includes(result.info.public_id) || prev.length >= 6) return prev;
+                            return [...prev, result.info.public_id];
+                          });
+                          toast.success("ছবি সফলভাবে আপলোড হয়েছে");
+                        }
+                      }}
+                    >
+                      {({ open }) => {
+                        return (
+                          <div className="flex flex-col items-center gap-3 w-full">
+                            {imageIds.length > 0 ? (
+                              <div className="flex flex-col w-full gap-2">
+                                {imageIds.map((id, index) => (
+                                  <div key={id} className="flex items-center justify-between w-full bg-white p-3 rounded-md border shadow-sm">
+                                    <span className="text-sm text-green-700 font-medium">Image {index + 1}</span>
+                                    <Button 
+                                      variant="outlined" 
+                                      color="error" 
+                                      size="small"
+                                      onClick={async (e) => {
+                                        e.preventDefault();
+                                        setImageIds(prev => prev.filter(i => i !== id));
+                                        try {
+                                          await fetch("/api/delete-image", {
+                                            method: "POST",
+                                            headers: { "Content-Type": "application/json" },
+                                            body: JSON.stringify({ publicId: id }),
+                                          });
+                                          toast.success("ছবি মুছে ফেলা হয়েছে");
+                                        } catch (err) {
+                                          console.error("Failed to delete image:", err);
+                                        }
+                                      }}
+                                    >
+                                      মুছে ফেলুন
+                                    </Button>
+                                  </div>
+                                ))}
+                                {imageIds.length < 6 && (
+                                  <Button 
+                                    variant="text" 
+                                    onClick={(e) => {
+                                      e.preventDefault();
+                                      open();
+                                    }}
+                                  >
+                                    আরও ছবি আপলোড করুন
+                                  </Button>
+                                )}
+                              </div>
+                            ) : (
+                              <Button 
+                                variant="outlined" 
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  open();
+                                }}
+                              >
+                                ছবি আপলোড করুন
+                              </Button>
+                            )}
+                          </div>
+                        );
+                      }}
+                    </CldUploadWidget>
+                  </div>
                 </div>
 
                 <Button

@@ -11,12 +11,28 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
+import Image from "next/image";
 
 export default function CheckInPage() {
   const router = useRouter();
   const [caseId, setCaseId] = useState("");
   const [passphrase, setPassphrase] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const handlePaste = (e: React.ClipboardEvent<HTMLDivElement>) => {
+    const pastedText = e.clipboardData.getData("text");
+    if (!pastedText) return;
+
+    const caseIdMatch = pastedText.match(/কেস আইডি:\s*(\S+)/);
+    const passphraseMatch = pastedText.match(/পাসফ্রেজ:\s*(.+)/);
+
+    if (caseIdMatch || passphraseMatch) {
+      e.preventDefault();
+      if (caseIdMatch) setCaseId(caseIdMatch[1].toUpperCase());
+      if (passphraseMatch) setPassphrase(passphraseMatch[1].trim().toLowerCase());
+      toast.success("তথ্য স্বয়ংক্রিয়ভাবে বসানো হয়েছে");
+    }
+  };
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -56,16 +72,25 @@ export default function CheckInPage() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <header className="border-b px-6 py-4 flex items-center justify-between">
+      <header className="border-b px-8 py-4 flex items-center justify-between">
+        {/* Brand & Logo Container */}
         <div className="flex items-center gap-2">
-          <SecurityIcon className="h-5 w-5 text-primary" />
-          <Link
-            href="/"
-            className="font-semibold text-foreground hover:text-primary transition-colors"
-          >
-            BCPSC Report System
-          </Link>
+          <Image
+            src="/logo.jpg"     // References public/logo.jpg automatically
+            alt="BCPSC Logo"
+            width={37}          // Adjust width as needed (32px = h-8)
+            height={37}         // Adjust height as needed
+            className="object-contain rounded-md" // Optional styling: smooths sharp image edges
+            priority            // Ensures the navbar logo loads instantly without layout shifts
+          />
         </div>
+        
+        <Link
+          href="/"
+          className="text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2 rounded-md transition-colors shadow-sm"
+        >
+          নতুন রিপোর্ট করো
+        </Link>
       </header>
 
       <main className="flex-1 flex items-center justify-center px-4 py-12">
@@ -117,6 +142,7 @@ export default function CheckInPage() {
                     placeholder="যেমন A3K7M2PQ5N"
                     value={caseId}
                     onChange={(e) => setCaseId(e.target.value.toUpperCase())}
+                    onPaste={handlePaste}
                     autoComplete="off"
                     inputProps={{
                       autoCorrect: "off",
@@ -145,6 +171,7 @@ export default function CheckInPage() {
                     onChange={(e) =>
                       setPassphrase(e.target.value.toLowerCase())
                     }
+                    onPaste={handlePaste}
                     autoComplete="off"
                     inputProps={{
                       autoCorrect: "off",

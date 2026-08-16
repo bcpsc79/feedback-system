@@ -13,6 +13,8 @@ import SecurityIcon from "@mui/icons-material/Security";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function StaffSignInPage() {
   const router = useRouter();
@@ -43,12 +45,25 @@ export default function StaffSignInPage() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <header className="border-b px-6 py-4 flex items-center gap-2">
-        <SecurityIcon className="text-primary" />
-        <span className="font-semibold text-foreground">
-          BCPSC Report System
-        </span>
-        <span className="text-muted-foreground text-sm">· স্টাফ অ্যাক্সেস</span>
+      <header className="border-b px-8 py-4 flex items-center justify-between">
+        {/* Brand & Logo Container */}
+        <div className="flex items-center gap-2">
+          <Image
+            src="/logo.jpg"     // References public/logo.jpg automatically
+            alt="BCPSC Logo"
+            width={37}          // Adjust width as needed (32px = h-8)
+            height={37}         // Adjust height as needed
+            className="object-contain rounded-md" // Optional styling: smooths sharp image edges
+            priority            // Ensures the navbar logo loads instantly without layout shifts
+          />
+        </div>
+        
+        <Link
+          href="/check-in"
+          className="text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2 rounded-md transition-colors shadow-sm"
+        >
+          রিপোর্টের খবর দেখো
+        </Link>
       </header>
 
       <main className="flex-1 flex items-center justify-center px-4 py-12">
