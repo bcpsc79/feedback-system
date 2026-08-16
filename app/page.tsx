@@ -177,12 +177,13 @@ export default function ReportPage() {
                         multiple: true,
                         maxFiles: 6,
                       }}
-                      onSuccess={(result: any) => {
-                        if (result?.info?.public_id) {
+                      onSuccess={(result: { info?: string | { public_id?: string } }) => {
+                        const info = typeof result?.info === 'object' ? result.info : null;
+                        if (info?.public_id) {
                           setImageIds(prev => {
                             // Don't add duplicates and respect max 6
-                            if (prev.includes(result.info.public_id) || prev.length >= 6) return prev;
-                            return [...prev, result.info.public_id];
+                            if (prev.includes(info.public_id!) || prev.length >= 6) return prev;
+                            return [...prev, info.public_id!];
                           });
                           toast.success("ছবি সফলভাবে আপলোড হয়েছে");
                         }
