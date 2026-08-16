@@ -25,7 +25,7 @@ export async function GET(request: Request) {
     });
 
     return NextResponse.json({ url: secureSignedUrl }, { status: 200 });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: 'Token generation subsystem failure' }, { status: 500 });
   }
 }
